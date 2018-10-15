@@ -1,91 +1,23 @@
 <?php
 // require once like a config file he will create
 require_once "config.php";
-// definr variables
- $username = $password = $confirm_password = "";
- $username_err = $password_err = $confirm_password_err = "";
+// If the values are posted, insert them into the database.
+if (isset($_POST['username']) && isset($_POST['password'])){
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
- //process it
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        // validate username
-    if(empty(trim($_POST["username"]))){
-    $username_err = "Please enter a username.";
+    $query = "INSERT INTO `users` (username, password, email) VALUES ('$username', SHA1('$password'), '$email')";
+    $result = mysqli_query($dbc, $query);
+
+    if($result){
+        $smsg = "User Created Successfully.";
+        header('Location: http://localhost/Parking_Panda/login.php');
     }else{
-        $sql_stmt = "select id from users where username = ?";
-
-        if($stmt = mysqli_prepare($link, $sql_stmt)){
-            mysqli_stmt_bind_param($stmt, "s", $pa_user);
-
-            // set it
-            $pa_user = trim($_POST["username"]);
-
-            if(mysqli_stmt_execute($stmt)){
-                //store result
-                mysqli_stmt_store_result($stmt);
-
-             if(mysqli_stmt_num_rows($stmt) == 1){
-                 $username_err = "Username already exist";
-             }else {
-                 $username = trim($_POST["username"]);
-             }
-             }else{
-                echo "Please try again later";
-            }
-        }
-            mysqli_stmt_close($stmt);
+        $fmsg ="User Registration Failed";
     }
-
-        // Validate password
-        if(empty(trim($_POST["password"]))){
-            $password_err = "Please enter a password.";
-        } elseif(strlen(trim($_POST["password"])) < 6){
-            $password_err = "Password must have atleast 6 characters.";
-        } else{
-            $password = trim($_POST["password"]);
-        }
-
-        // Validate confirm password
-        if(empty(trim($_POST["confirm_password"]))){
-            $confirm_password_err = "Please confirm password.";
-        } else{
-            $confirm_password = trim($_POST["confirm_password"]);
-            if(empty($password_err) && ($password != $confirm_password)){
-                $confirm_password_err = "Password did not match.";
-            }
-        }
-
-        // Check input errors before inserting in database
-        if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-
-            // Prepare an insert statement
-            $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-
-            if($stmt = mysqli_prepare($link, $sql)){
-                // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
-
-                // Set parameters
-                $param_username = $username;
-                $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-
-                // Attempt to execute the prepared statement
-                if(mysqli_stmt_execute($stmt)){
-                    // Redirect to login page
-                    header("location: login.php");
-                } else{
-                    echo "Something went wrong. Please try again later.";
-                }
-            }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
-        }
-
-        // Close connection
-        mysqli_close($link);
-
-
-
+    mysqli_close($dbc);
+}
 
 
     /*
@@ -101,7 +33,7 @@ require_once "config.php";
             $fmsg ="User Registration Failed";
         }
     */
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +45,7 @@ require_once "config.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--<link rel="icon" href="../../favicon.ico">-->
 
-  <title>Coatings Tracker</title>
+  <title>Panking Panda</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
