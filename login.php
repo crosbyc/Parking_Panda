@@ -38,14 +38,13 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 */
 // Include config file
-require_once "mysqli_connect.php";
+
 
 if (isset($_POST['username']) and isset($_POST['password'])){
     $_SESSION['login'] = true;
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM `users` WHERE Name='$username' and Password=SHA1('$password')";
 
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
 
@@ -54,7 +53,7 @@ if (isset($_POST['username']) and isset($_POST['password'])){
     if ($count == 1){
         $_SESSION['username'] = $username;
 
-        header('Location: http://localhost/Parking_Panda_V2/view.php');
+
         //http://localhost/Parking_Panda/view.html
     }else{
         $fmsg = "Invalid Login Credentials.";
