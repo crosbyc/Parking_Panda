@@ -1,4 +1,26 @@
- <?php
+<?php
+// require once like a config file he will create
+require_once "mysqli_connect.php";
+// If the values are posted, insert them into the database.
+if (isset($_POST['username']) && isset($_POST['password'])){
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = "INSERT INTO `users` (Name, Password, Email) VALUES ('$username', SHA1('$password'), '$email')";
+    $result = mysqli_query($dbc, $query);
+
+    if($result){
+        $smsg = "User Created Successfully.";
+        header('Location: http://localhost/Parking_Panda_v2/login.php');
+    }else{
+        $fmsg ="User Registration Failed";
+    }
+    mysqli_close($dbc);
+}
+
+
+    /*
     if (isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
         $email = $_POST['email'];
@@ -10,7 +32,8 @@
         }else{
             $fmsg ="User Registration Failed";
         }
-    }
+    */
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +45,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--<link rel="icon" href="../../favicon.ico">-->
 
-  <title>Coatings Tracker</title>
+  <title>Panking Panda</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -77,9 +100,11 @@
             <!-- Write a PHP script to store new log in info in mySQL db -->
             <form action="register.php" method="post">
               Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
-              Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
+             Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
                Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
-              <input type="submit" name="submit" value="Register"><br>
+                Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
+
+                <input type="submit" name="submit" value="Register"><br>
             </form>
           </div>
         </div>

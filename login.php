@@ -1,15 +1,78 @@
-<?php  
+<?php
+/*
 if (isset($_POST['username']) and isset($_POST['password'])){
-$username = $_POST['username'];
-$password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-if ($username == "Test" && $password == "password"){
-header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/view.html');
-}else{
-$fmsg = "Invalid Login Credentials.";
+    function Login(){
+        if (empty($_POST['username'])){
+            $this->HandleError("Username does not exist");
+            return false;
+        }
+
+        if (empty($_POST['password'])){
+            $this->HandleError("Password incorrect");
+            return false;
+        }
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+    }
+
+    if ($username == "Test" && $password == "password"){
+        header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/view.html');
+    }else{
+        $fmsg = "Invalid Login Credentials.";
+    }
 }
+*/
+// Initialize the session
+/*
+session_start();
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    //where do we want to direct them to after login
+    exit;
 }
+*/
+// Include config file
+require_once "mysqli_connect.php";
+
+if (isset($_POST['username']) and isset($_POST['password'])){
+    $_SESSION['login'] = true;
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM `users` WHERE Name='$username' and Password=SHA1('$password')";
+
+    $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
+
+    $count = mysqli_num_rows($result);
+//If the posted values are equal to the database values, then the session will be created for the user.
+    if ($count == 1){
+        $_SESSION['username'] = $username;
+
+        header('Location: http://localhost/Parking_Panda_V2/view.php');
+        //http://localhost/Parking_Panda/view.html
+    }else{
+        $fmsg = "Invalid Login Credentials.";
+        echo "You have invalid credentials";
+    }
+}
+
+if (isset($_SESSION['username'])){
+    $username = $_SESSION['username'];
+}
+
+
 ?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
