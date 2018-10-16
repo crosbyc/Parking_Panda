@@ -47,6 +47,8 @@ if (isset($_POST['username']) and isset($_POST['password'])){
 
     $query = "SELECT * FROM `users` WHERE Name='$username' and Password=SHA1('$password')";
 
+
+    
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
 
     $count = mysqli_num_rows($result);
