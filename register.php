@@ -1,18 +1,18 @@
 <?php
 // require once like a config file he will create
-require_once "config.php";
+
 // If the values are posted, insert them into the database.
 if (isset($_POST['username']) && isset($_POST['password'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "INSERT INTO `users` (username, password, email) VALUES ('$username', SHA1('$password'), '$email')";
+
     $result = mysqli_query($dbc, $query);
 
     if($result){
         $smsg = "User Created Successfully.";
-        header('Location: http://localhost/Parking_Panda/login.php');
+
     }else{
         $fmsg ="User Registration Failed";
     }
@@ -100,7 +100,7 @@ if (isset($_POST['username']) && isset($_POST['password'])){
             <!-- Write a PHP script to store new log in info in mySQL db -->
             <form action="register.php" method="post">
               Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
-             <!-- Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br> -->
+
                Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
                 Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
 
