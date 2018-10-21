@@ -55,7 +55,7 @@ if (isset($_POST['username']) and isset($_POST['password'])){
     if ($count == 1){
         $_SESSION['username'] = $username;
 
-        header('Location: http://localhost/Parking_Panda_V2/view.php');
+        header('Location: view.php');
         //http://localhost/Parking_Panda/view.html
     }else{
         $fmsg = "Invalid Login Credentials.";
