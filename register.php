@@ -12,7 +12,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
 
     if($result){
         $smsg = "User Created Successfully.";
-        header('Location: http://localhost/Parking_Panda_v2/login.php');
+        header('Location: login.php');
     }else{
         $fmsg ="User Registration Failed";
     }
