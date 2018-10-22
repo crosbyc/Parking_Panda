@@ -6,33 +6,25 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+	
+	$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";
+	$e_CheckRes = mysqli_query($dbc, $emailCheck);
 
     $query = "INSERT INTO `users` (Name, Password, Email) VALUES ('$username', SHA1('$password'), '$email')";
-    $result = mysqli_query($dbc, $query);
-
-    if($result){
+  	
+	if(mysqli_num_rows($e_CheckRes) > 0){
+		$fmsg ="Sorry! This email account already exist..Try another";
+	}
+    else if(mysqli_query($dbc, $query)){
         $smsg = "User Created Successfully.";
         header('Location: login.php');
     }else{
+
         $fmsg ="User Registration Failed";
     }
     mysqli_close($dbc);
 }
 
-
-    /*
-    if (isset($_POST['username']) && isset($_POST['password'])){
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        if($username == "Test" && $email == "Test@gmail.com" && $password == "password" && isset($_POST['submit'])){
-            $smsg = "User Created Successfully.";
-             header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/login.php'); 
-             exit;
-        }else{
-            $fmsg ="User Registration Failed";
-        }
-    */
 
 ?>
 
@@ -106,6 +98,15 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
 
                 <input type="submit" name="submit" value="Register"><br>
             </form>
+			
+<?php if(isset($fmsg)) : ?>
+	<div class="alert alert-danger">
+		<?=$fmsg?>
+		<php unset($fmsg); ?>
+	</div>
+<?php endif; ?>
+		
+			
           </div>
         </div>
       </div>
