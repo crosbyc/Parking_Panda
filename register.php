@@ -2,17 +2,21 @@
 // require once like a config file he will create
 require_once "mysqli_connect.php";
 // If the values are posted, insert them into the database.
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['cpassword']) && isset($_POST['email'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-	
+	$C_password = $_POST['cpassword'];
+		
 	$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";
 	$e_CheckRes = mysqli_query($dbc, $emailCheck);
 
     $query = "INSERT INTO `users` (Name, Password, Email) VALUES ('$username', SHA1('$password'), '$email')";
   	
-	if(mysqli_num_rows($e_CheckRes) > 0){
+	if ($C_password !== $password) {
+		$fmsg ="Sorry! Confirmation password does not match..Try again";
+	}
+	else if(mysqli_num_rows($e_CheckRes) > 0){
 		$fmsg ="Sorry! This email account already exist..Try another";
 	}
     else if(mysqli_query($dbc, $query)){
@@ -94,7 +98,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
               Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
              Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
                Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
-                Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
+                Confirm Password: <br><input type="password" name="cpassword" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['cpassword'])) echo $_POST['cpassword']; ?>"><br><br>
 
                 <input type="submit" name="submit" value="Register"><br>
             </form>
