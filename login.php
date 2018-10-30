@@ -45,8 +45,6 @@ if (isset($_POST['username']) and isset($_POST['password'])){
     $password = $_POST['password'];
 
     $query = "SELECT * FROM `users` WHERE Name='$username' and Password=SHA1('$password')";
-
-
     
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
 
@@ -55,11 +53,10 @@ if (isset($_POST['username']) and isset($_POST['password'])){
     if ($count == 1){
         $_SESSION['username'] = $username;
 
-        header('Location: http://localhost/Parking_Panda_V2/view.php');
-        //http://localhost/Parking_Panda/view.html
+        header('Location: view.php');
+
     }else{
-        $fmsg = "Invalid Login Credentials.";
-        echo "You have invalid credentials";
+        $fmsg = "Login Failed. Invalid Login Credentials.";
     }
 }
 
@@ -133,6 +130,14 @@ if (isset($_SESSION['username'])){
               <input type="password" name="password" pattern="[^\/;,*<>=+]*" id="inputPassword" class="form-control"><br><br>
               <input type="submit" name="submitLogIn" value="Log In">
             </form>
+			
+<?php if(isset($fmsg)) : ?>
+	<div class="alert alert-danger">
+		<?=$fmsg?>
+		<php unset($fmsg); ?>
+	</div>
+<?php endif; ?>			
+			
           </div>
         </div>
       </div>
