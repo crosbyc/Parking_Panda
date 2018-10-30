@@ -97,6 +97,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['cpas
             <form action="register.php" method="post">
               Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
              Email Adress: <br><input type="email" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
+             Type: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"><br><br>
                Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
                 Confirm Password: <br><input type="password" name="cpassword" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['cpassword'])) echo $_POST['cpassword']; ?>"><br><br>
 
