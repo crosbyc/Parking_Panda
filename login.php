@@ -134,7 +134,7 @@ if (isset($_SESSION['username'])){
 <?php if(isset($fmsg)) : ?>
 	<div class="alert alert-danger">
 		<?=$fmsg?>
-		<php unset($fmsg); ?>
+		<?php unset($fmsg); ?>
 	</div>
 <?php endif; ?>			
 			
