@@ -2,27 +2,30 @@
 // require once like a config file he will create
 require_once "mysqli_connect.php";
 // If the values are posted, insert them into the database.
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['cpassword']) && isset($_POST['email'])){
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['cpassword']) && isset($_POST['email']) && isset($_POST['type']) && isset($_POST['phonenumber'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 	$C_password = $_POST['cpassword'];
+	$type = $_POST['type'];
+	$phonenumber = $_POST['phonenumber'];
 		
 	$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";
 	$e_CheckRes = mysqli_query($dbc, $emailCheck);
 
-    $query = "INSERT INTO `users` (Name, Password, Email) VALUES ('$username', SHA1('$password'), '$email')";
+    $query = "INSERT INTO `users` (Name, Password, Email, Type, PhoneNumber) VALUES ('$username', SHA1('$password'), '$email', '$type', '$phonenumber')";
   	
 	if ($C_password !== $password) {
 		$fmsg ="Sorry! Confirmation password does not match..Try again";
 	}
-	else if(mysqli_num_rows($e_CheckRes) > 0){
+	else if(mysqli_num_rows($e_CheckRes) > 0 ){
 		$fmsg ="Sorry! This email account already exist..Try another";
 	}
+
     else if(mysqli_query($dbc, $query)){
         $smsg = "User Created Successfully.";
         header('Location: login.php');
-    }else{
+   }else{
 
         $fmsg ="User Registration Failed";
     }
@@ -94,20 +97,22 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['cpas
           <div class="col-md-6">
             <h4>If You Do Not Have an Account - <br> Please Create One Using the Form Below:</h4>
             <!-- Write a PHP script to store new log in info in mySQL db -->
-            <form action="register.php" method="post">
-              Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
-             Email Adress: <br><input type="email" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
-             Type: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"><br><br>
-               Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
-                Confirm Password: <br><input type="password" name="cpassword" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['cpassword'])) echo $_POST['cpassword']; ?>"><br><br>
-
+           
+			<form action="register.php" method="post">
+             Your Name: <br><input required type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
+             Email Adress: <br><input required type="email" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
+             Phone Number: <br><input required type="tel" name="phonenumber" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phonenumber'])) echo $_POST['phonenumber']; ?>"><br><br>
+   			 User Type:<br><input required type="text" name="type" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"><br><br>
+             Create Password: <br><input required type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
+             Confirm Password: <br><input required type="password" name="cpassword" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['cpassword'])) echo $_POST['cpassword']; ?>"><br><br>
+			
                 <input type="submit" name="submit" value="Register"><br>
             </form>
 			
 <?php if(isset($fmsg)) : ?>
 	<div class="alert alert-danger">
 		<?=$fmsg?>
-		<php unset($fmsg); ?>
+		<?php unset($fmsg); ?>
 	</div>
 <?php endif; ?>
 		
