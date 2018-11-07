@@ -24,6 +24,9 @@
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
      }
+	 
+
+	 
      mysqli_close($dbc);
 
 ?>
@@ -103,10 +106,19 @@
                                     * comments: <br><textarea rows="4" cols="50" name="comments" id="Comments" pattern="[^\/;,*<>=+]*"></textarea><br>
                                     <input type="submit" name="insert_parking_info" value="Insert"><br>
                                     <br>
-                                    Download our Template
-                                    <input type="submit" name="download_template" value="Template"><br>
+
                                     Upload Parking Information
                                     <input type="submit" name="upload_parking_info" value="Upload"><br>
+
+
+                                </form>
+								
+								                                <!--form starts here-->
+                                <form action="getParkingInfo.php" method='post'>
+                                    <br>
+                                    Download our Template
+                                    <input action="getParkingInfo.php" method='post' type="submit" name="download_template" value="Template"><br>
+
 
 
                                 </form>

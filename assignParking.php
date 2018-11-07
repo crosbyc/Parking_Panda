@@ -5,7 +5,7 @@
    header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
    die;
 }*/
-    if (isset($_POST['Renters_Name']) && isset($_POST['Unit_Number']) && isset($_POST['Phone_Number']) && isset($_POST['Building']) && isset($_POST['comments'])){
+    if (isset($_POST['Name']) && isset($_POST['Appartment Number']) && isset($_POST['Phone Number'])){
         /*
          $username = $_SESSION['username'];
          if($username == ''){
@@ -13,13 +13,25 @@
              header('Location: http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php');
          }
          */
-         $rentersName = $_POST['Renters_Name'];
-         $unitNumber = $_POST['Unit_Number'];
-         $phoneNumber = $_POST['Phone_Number'];
+         $rentersName = $_POST['Name'];
+         $unitNumber = $_POST['Appartment Number'];
+         $phoneNumber = $_POST['Phone Number'];
  
-         $renterQuery = "SELECT * FROM `renters` WHERE `Renters Name`='$rentersName', `Appartment Number`='$unitNumber', `Phone Number`='$phoneNumber'";
-         mysqli_query($dbc, $renterQuery)or die(mysqli_error($dbc));
-     }
+         $renterQuery = "SELECT * FROM `renters` WHERE `Name`='$rentersName', `Appartment Number`='$unitNumber', `Phone Number`='$phoneNumber'";
+         $result = mysqli_query($dbc, $renterQuery)or die(mysqli_error($dbc));
+		 
+		 $count = mysqli_num_rows($result);
+		 
+		 if ($count == 1){
+        $_SESSION['username'] = $username;
+
+        header('Location: view.php');
+
+    }else{
+        $fmsg = "Invalid Resident. Check resident information";
+    }
+}
+     
      mysqli_close($dbc);
 
 ?>
@@ -84,9 +96,9 @@
                                 <h3>Resident Information</h3>
                                 <!--form starts here-->
                                 <form action="insertParkingInfo.php" method='post'>
-                                    * What is the Renters Name? <br><input type="text" name="Renters_Name" pattern="[^\/;,*<>=+]*"><br>
-                                    * What is their Unit Number? <br><input type="text" name="Unit_Number" id="rentersName" pattern="[^\/;,*<>=+]*"><br>
-                                    * What is their Phone Number? <br><input type="text" name="Phone_Number" id="Loc" pattern="[^\/;,*<>=+]*"><br>
+                                    * What is the Renters Name? <br><input type="text" name="Name" pattern="[^\/;,*<>=+]*"><br>
+                                    * What is their Unit Number? <br><input type="text" name="Appartment Number" id="rentersName" pattern="[^\/;,*<>=+]*"><br>
+                                    * What is their Phone Number? <br><input type="text" name="Phone Number" id="Loc" pattern="[^\/;,*<>=+]*"><br>
                                     <input type="button" onclick="location.href='updateParking.php';" value="Assign A Parking Spot" />
                             </form>
                         </div>
