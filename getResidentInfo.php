@@ -2,8 +2,8 @@
   //  session_start();
 	require('mysqli_connect.php');
 	 
-			$filename = "ParkingInfoTemplate";  
-			$sql = "Select * from `parking space`";
+			$filename = "ResidentInfoTemplate";  
+			$sql = "Select * from `resident`";
 			//execute query 
 			$result = mysqli_query($dbc,$sql) or die( mysql_error());
 			$file_ending = "xls";

@@ -196,7 +196,7 @@ if (isset($_POST['showAvailable'])){
                                         </tr>
                                     </thead>
                                     <tbody>';
-$toBeDetermined = "TBD";
+$toBeDetermined = "TBD1";
 $query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined'";
 $result = mysqli_query($dbc,$query2);
 if (!$result) {

@@ -106,22 +106,12 @@
                                     * comments: <br><textarea rows="4" cols="50" name="comments" id="Comments" pattern="[^\/;,*<>=+]*"></textarea><br>
                                     <input type="submit" name="insert_parking_info" value="Insert"><br>
                                     <br>
-
-                                    Upload Parking Information
-                                    <input type="submit" name="upload_parking_info" value="Upload"><br>
-
-
                                 </form>
-								
-								                                <!--form starts here-->
-                                <form action="getParkingInfo.php" method='post'>
-                                    <br>
-                                    Download our Template
-                                    <input action="getParkingInfo.php" method='post' type="submit" name="download_template" value="Template"><br>
 
-
-
-                                </form>
+								<div class="btn-group-vertical btn-space" role="group" aria-label="...">
+									<input action="uploadParkingInfo.php" method='post' type="submit" value="Upload Data From File" class="btn btn-primary btn-lg" name="upload_template" >
+									<input action="getParkingInfo.php" method='post' type="submit" value="Download A Template" class="btn btn-primary btn-lg" name="download_template" >
+								</div>
                         </div>
                     </div>
                 </div>
