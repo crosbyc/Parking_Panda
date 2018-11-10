@@ -99,7 +99,7 @@
 										* What is their Unit Number? <br>
 										<div class="input-group input-group-lg">
 											<span class="input-group-addon" id="basic-addon1">@</span>
-											<input type="text" class="form-control" placeholder="Apartment Number" name="aptNo" id="rentersName" pattern="[^\/;,*<>=+]*"/>
+											<input type="text" class="form-control" placeholder="Apartment Number" name="aptNo" id="rentersName" pattern="[^\/;,*<>=+]*" />
 										</div></br>
 										* What is their Phone Number? <br>
 										<div class="input-group input-group-lg"><span class="input-group-addon" id="basic-addon1">

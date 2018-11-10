@@ -109,8 +109,10 @@
                                 </form>
 
 								<div class="btn-group-vertical btn-space" role="group" aria-label="...">
+								<form action="getParkingInfo.php" method='post'>
 									<input action="uploadParkingInfo.php" method='post' type="submit" value="Upload Data From File" class="btn btn-primary btn-lg" name="upload_template" >
 									<input action="getParkingInfo.php" method='post' type="submit" value="Download A Template" class="btn btn-primary btn-lg" name="download_template" >
+								</form>
 								</div>
                         </div>
                     </div>
