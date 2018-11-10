@@ -86,35 +86,82 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4">
-                            <h5>* Indicates required field<br>
-                                <h3>Parking Spots</h3>
-                                <!--form starts here-->
-                                <form action="insertParkingInfo.php" method='post'>
-                                    * Spot Number: <br><input type="text" name="spot_id" pattern="[^\/;,*<>=+]*"><br>
-                                      Renter's Name: <br><input type="text" name="renters_name" id="rentersName"
-                                        pattern="[^\/;,*<>=+]*"><br>
-                                    * Location: <br><input type="text" name="Location" id="Loc" pattern="[^\/;,*<>=+]*"><br>
-                                    * Type: <select name="Type">
-                                        <option value="Regular">Regular</option>
-                                        <option value="Compact">Compact</option>
-                                        <option value="Electric">Electric</option>
-                                        <option value="Handicap">Handicap</option>
-                                        <option value="Contractor">Contractor</option>
-                                    </select><br><br>
-                                    * Building <br><input type="text" name="Building" id="buildingLocation" pattern="[^\/;,*<>=+]*"><br>
-                                    * comments: <br><textarea rows="4" cols="50" name="comments" id="Comments" pattern="[^\/;,*<>=+]*"></textarea><br>
-                                    <input type="submit" name="insert_parking_info" value="Insert"><br>
-                                    <br>
-                                </form>
 
-								<div class="btn-group-vertical btn-space" role="group" aria-label="...">
-								<form action="getParkingInfo.php" method='post'>
-									<input action="uploadParkingInfo.php" method='post' type="submit" value="Upload Data From File" class="btn btn-primary btn-lg" name="upload_template" >
-									<input action="getParkingInfo.php" method='post' type="submit" value="Download A Template" class="btn btn-primary btn-lg" name="download_template" >
-								</form>
+                        <h3>Parking Spots</h3>
+                        <!--form starts here-->
+                        <form action="insertParkingInfo.php" method='post'>
+							<div class="row">	
+								<div class="form-group col-lg-10 col-md-4 col-md-4 col-lg-4">
+									<label for="spot">* Spot Number:</label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1">#</span>
+										<input required placeholder="Parking Spot Number" class="form-control" type="text" id="spot" name="spot_id" pattern="[^\/;,*<>=+]*">
+									</div>	
+								</div>	
+								<div class="form-group col-lg-10 col-md-4 col-md-4 col-lg-4">
+									<label for="renter">Renter's Name: </label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>
+										<input required placeholder="Renters's Name" class="form-control" id="renter" type="text" name="renters_name" id="rentersName" pattern="[^\/;,*<>=+]*">
+									</div>	
+								</div>										
+							</div>			
+							<div class="row">										
+								<div class="form-group col-lg-10 col-md-4 col-md-4 col-lg-4">
+									<label for="loc">* Location: </label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-th" ></span></span>
+										<input required placeholder="Building Location" class="form-control" id="loc" type="text" name="Location" id="Loc" pattern="[^\/;,*<>=+]*"><br>
+ 									</div>	
+								</div>                                  
+								<div class="form-group col-lg-10 col-md-4 col-md-4 col-lg-4">
+									<label for="typ">* Type: </label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-ok" ></span></span>
+										<select class="form-control" id="typ" name="Type">
+											<option value="Regular">Regular</option>
+											<option value="Compact">Compact</option>
+											<option value="Electric">Electric</option>
+											<option value="Handicap">Handicap</option>
+											<option value="Contractor">Contractor</option>
+										</select>
+ 									</div>	
+								</div>									
+							</div>									
+ 							<div class="row">										
+								<div class="form-group col-lg-10 col-md-4 col-md-4 col-lg-4">
+									<label for="bld">* Building: </label> 
+									<div class="input-group input-group-sm">									
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home" ></span></span>
+										<input required placeholder="Building Number" class="form-control" id="bld" type="text" name="Building" id="buildingLocation" pattern="[^\/;,*<>=+]*">
+									</div>
+								</div>										
+							</div>									
+							<div class="row">		    
+								<div class="form-group col-lg-8 col-md-8 col-lg-8">
+									<label for="comments">Comment:</label>
+									<textarea rows="3" class="form-control"  name="comments" id="Comments" pattern="[^\/;,*<>=+]*"></textarea><br>
 								</div>
-                        </div>
+							</div>                                    
+							<div class="row">
+								<button  type="submit" class="btn btn-primary btn-lg" name="insert_parking_info">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Add Parking
+								</button> 
+							</div>									
+                                   
+                        </form>
+
+						<div class="row" style="margin-top:10px" style="display:inline;">
+							<form	action="uploadParkingTemplate.php" method='post' style="display:inline;">
+								<button style="margin-left:25%"  type="submit"  class="btn btn-default btn-lg" name="upload_" >
+								<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From File</button>
+							</form>								
+							<form	action="getParkingInfo.php" method='post' style="display:inline;">	
+								<button  style="margin-left:5%"  type="submit" class="btn btn-default btn-lg" name="download_template" >
+								<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Download Template</button>
+							</form>
+						</div>
+
                     </div>
                 </div>
 
