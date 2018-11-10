@@ -86,9 +86,7 @@
 
                 <div class="container">
                     <div class="row">
-						<div>
-                            <h5>* Indicates required field<br> 
-						</div>
+
 
                         <!--form starts here-->
                         <form action="insertResidentInfo.php" method='post'>
@@ -97,14 +95,14 @@
 									<label for="resident">* Resident's Name:</label>
 									<div class="input-group input-group-sm">
 										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>
-										<input  class="form-control" placeholder="Resident's Name" type="text" name="Residents_Name" id="resident" pattern="[^\/;,*<>=+]*"  />
+										<input  required class="form-control" placeholder="Resident's Name" type="text" name="Residents_Name" id="resident" pattern="[^\/;,*<>=+]*"  >
 									</div>
 								</div>
 								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">								
 									<label for="apt">* Apartment Number:</label>
 									<div class="input-group input-group-sm">
-										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>
-										<input class="form-control" id="apt" placeholder="Apartment Number" type="text" name="Apartment_Number" id="apartmentNumber"  pattern="[^\/;,*<>=+]*"/>
+										<span class="input-group-addon" id="basic-addon1">#</span>
+										<input required class="form-control" id="apt" placeholder="Apartment Number" type="text" name="Apartment_Number" id="apartmentNumber"  pattern="[^\/;,*<>=+]*"/>
 									</div>
 								</div>
 							</div>
@@ -113,15 +111,15 @@
 								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
 									<label for="lpd">* Leasing Period:</label>
 									<div class="input-group input-group-sm">
-										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>									
-										<input class="form-control" id="lpd" placeholder="Leasing Period"  type="text" name="Leasing_Period" id="leasingPeriod"/>
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" ></span></span>									
+										<input  required class="form-control" id="lpd" placeholder="Leasing Period"  type="text" name="Leasing_Period" id="leasingPeriod"/>
 									</div>
 								</div>	
 								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
 									<label for="bldg">* Building:</label> 
 									<div class="input-group input-group-sm">
-										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>									
-										<input class="form-control" id="bldg" placeholder="Building"  type="text" name="Building" id="building" pattern="[^\/;,*<>=+]*"/>
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home" ></span></span>									
+										<input  required class="form-control" id="bldg" placeholder="Building"  type="text" name="Building" id="building" pattern="[^\/;,*<>=+]*"/>
 									</div>
 								</div>
 							</div>
@@ -130,15 +128,15 @@
 								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
 									<label for="spot">* Parking Spot:</label> 
 									<div class="input-group input-group-sm">
-										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>	
-										<input class="form-control" id="spot" placeholder="Parking Spot" type="text" name="Parking_Spot" id="parkingSpot" pattern="[^\/;,*<>=+]*"/>
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-road" ></span></span>	
+										<input  required class="form-control" id="spot" placeholder="Parking Spot" type="text" name="Parking_Spot" id="parkingSpot" pattern="[^\/;,*<>=+]*"/>
 									</div>
 								</div>
 								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
 									<label for="phne">* Phone Number:</label>
 									<div class="input-group input-group-sm">
 										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-earphone" ></span></span>			
-										<input class="form-control" id="phne" placeholder="Phone Number" type="tel" name="Phone_Number" id="phoneNumber"   pattern="[^\/;,*<>=+]*"/>
+										<input required class="form-control" id="phne" placeholder="Phone Number" type="tel" name="Phone_Number" id="phoneNumber"   pattern="[^\/;,*<>=+]*"/>
 									</div>
 								</div>
 							</div>
@@ -148,14 +146,14 @@
 									<label for="eml">* Email:</label>
 									<div class="input-group input-group-sm">
 										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope" ></span></span>									
-										<input class="form-control" id="eml"  placeholder="Email Address" type="email" name="Email" id="email" pattern="[^\/;,*<>=+]*">
+										<input required class="form-control" id="eml"  placeholder="Email Address" type="email" name="Email" id="email" pattern="[^\/;,*<>=+]*">
 									</div>
 								</div>
 								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
 									<label for="pet">* Pets: </label>
 									<div class="input-group input-group-sm">
-										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-dog" ></span></span>									
-										<input class="form-control"  id="pet" placeholder="Number of Pets" type="text" name="Pets" id="pets" pattern="[^\/;,*<>=+]*">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-piggy-bank" ></span></span>									
+										<input required class="form-control"  id="pet" placeholder="Number of Pets" type="text" name="Pets" id="pets" pattern="[^\/;,*<>=+]*">
 									</div>
 								</div>
 							</div> 
@@ -166,23 +164,33 @@
 								</div>
 							</div>
 							<div class="row">
-								<button type="submit" class="btn btn-default btn-lg" name="insert_resident_info">
+								<button  type="submit" class="btn btn-primary btn-lg" name="insert_resident_info">
 									<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Add Resident
 								</button> 
 							</div>
 						</form>
-						<div class="row" style="margin-top:5px">
-							<button style="margin-left:70px" action="uploadResidentInfo.php" method='post' type="submit"  class="btn btn-default btn-lg" name="upload_template" >
-								<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From File</button>
-							<form	action="getResidentInfo.php" method='post'>
-								<button  style="margin-left:70px" action="getResidentInfo.php" method='post' type="submit" class="btn btn-default btn-lg" name="download_template" >
-								<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Download Template</button>
-							</form>	
-						</div>
+
 			   
                     </div>
                 </div>
-
+				
+<?php if(isset($uploadMsg)) : ?>
+	<div class="alert alert-danger">
+		<?=$uploadMsg?>
+		<?php unset($uploadMsg); ?>
+	</div>
+<?php endif; ?>	
+				
+				<div class="row" style="margin-top:10px" style="display:inline;">
+					<form	action="uploadTemplate.php" method='post' style="display:inline;">
+						<button style="margin-left:25%"  type="submit"  class="btn btn-default btn-lg" name="upload_" >
+						<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From File</button>
+					</form>
+					<form	action="getResidentInfo.php" method='post' style="display:inline;">
+						<button  style="margin-left:5%"  type="submit" class="btn btn-default btn-lg" name="download_template" >
+						<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Download Template</button>
+					</form>	
+				</div>
 
                 <!-- Bootstrap core JavaScript
     ================================================== -->
