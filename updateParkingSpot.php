@@ -1,10 +1,10 @@
 <?php
-  //  session_start();
+    session_start();
 	require('mysqli_connect.php');
-    /*if(!$_SESSION['login']){
+    if(!$_SESSION['login']){
    header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
    die;
-}*/
+}
     if (isset($_POST['spot_id']) && isset($_POST['renters_name'])){
         /*
          $username = $_SESSION['username'];
@@ -71,7 +71,7 @@
                     <li class="view.php"><a href="view.php">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
-                    <li><a href="delete.html">Delete Parking or Resident Info</a></li>
+                    <li><a href="RegisterAssistant.php">Register Office Assistant</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

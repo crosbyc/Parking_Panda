@@ -47,7 +47,19 @@
                     <li class="active"><a href="#">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
-                    <li><a href="delete.html">Delete Parking or Resident Info</a></li>
+                    <li><a href='RegisterAssistant.php'>Register Office Assistant</a></li>
+                    <?php
+                        session_start();
+                        require('mysqli_connect.php');
+                        $Username2 = $_SESSION['username'];
+                        $query3 = "SELECT `Type` FROM `users` WHERE Email='$Username2'";
+                        $result3 = mysqli_query($dbc,$query3);
+                        if($result3 == "Office Manager"){
+                            echo "<li><a href='RegisterAssistant.php'>Register Office Assistant</a></li>";
+                        }
+
+                    ?>
+                    
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -72,11 +84,16 @@
 <?php
 // Create connection
 //session_start();
-require('mysqli_connect.php');
-/*if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
+//require('mysqli_connect.php');
+//session_start();
+
+
+
+//echo $Type;
+if(!$_SESSION['login']){
+   header("location:http://localhost/Parking_Panda_V2/login.php");
    die;
-}*/
+}
 //$con=mysqli_connect("mysqli_connect.php");
 // Check connection
 if (mysqli_connect_errno())
@@ -84,7 +101,7 @@ if (mysqli_connect_errno())
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 //$Username = $_SESSION['username'];
-$query2 = "SELECT * FROM `parking space`";
+$query2 = "SELECT * FROM `parking space` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -97,8 +114,8 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Location"] .'</td>
                   <td> '.$row["Type"] .'</td>
                   <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>
-                </tr>';
+                  <td> '.$row["comments"] .'</td>';
+    //$query3 = "SELECT `Type` FROM `users` WHERE `username`= '$Username'";
     }
 } else {
     echo "0 results";
@@ -144,7 +161,7 @@ if (mysqli_connect_errno())
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 //$Username = $_SESSION['username'];
-$query2 = "SELECT * FROM `resident`";
+$query2 = "SELECT * FROM `resident` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -160,8 +177,14 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Phone Number"] .'</td>
                   <td> '.$row["Email Address"] .'</td>
                   <td> '.$row["Pets"] .'</td>
-                  <td> '.$row["comments"] .'</td>
-                </tr>';
+                  <td> '.$row["comments"] .'</td>';
+                  $query3 = "SELECT `type` FROM `users` WHERE `username`= '$Username'";
+    if($query3 == "Office Manager"){
+        echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
+        </tr>';
+    }else{
+        echo '</tr>';
+    }
     }
 } else {
     echo "0 results";
@@ -197,7 +220,7 @@ if (isset($_POST['showAvailable'])){
                                     </thead>
                                     <tbody>';
 $toBeDetermined = "TBD";
-$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined'";
+$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `userName`= '$Username'";
 $result = mysqli_query($dbc,$query2);
 if (!$result) {
     trigger_error('Invalid query: ');

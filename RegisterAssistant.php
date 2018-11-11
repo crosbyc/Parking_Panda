@@ -1,21 +1,23 @@
 <?php
 // require once like a config file he will create
+session_start();
+
 require_once "mysqli_connect.php";
 // If the values are posted, insert them into the database.
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['phoneNumber'])){
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phoneNumber'])){
     $username = $_POST['username'];
-    $email = $_POST['email'];
+    $email = $_SESSION['username'];
     $phoneNumber = $_POST['phoneNumber'];
     $password = $_POST['password'];
-    $type = "Office Manager";
+    $type = "Office Assistant";
 
 
     $query = "INSERT INTO `users` (Name, Password, Email, Type, `Phone Number`) VALUES ('$username', SHA1('$password'), '$email', '$type', '$phoneNumber')";
     $result = mysqli_query($dbc, $query);
 
     if($result){
-        $smsg = "User Created Successfully.";
-        header('Location: http://localhost/Parking_Panda_v2/login.php');
+        $smsg = "<span>User Created Successfully.</span>";
+        echo $smsg;
     }else{
         $fmsg ="User Registration Failed";
     }
@@ -89,7 +91,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="#">Register</a></li>
+          <li class="active"><a href="#">Register Office Assistant</a></li>
           <li><a href="login.php">Log In</a></li>
           <li><a href="index.html">Home</a></li>
         </ul>
@@ -101,11 +103,9 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
           <div class="col-md-6">
             <h4>If You Do Not Have an Account - <br> Please Create One Using the Form Below:</h4>
             <!-- Write a PHP script to store new log in info in mySQL db -->
-            <form action="register.php" method="post">
+            <form action="RegisterAssistant.php" method="post">
               Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
-             Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
              Phone Number: <br><input type="text" name="phoneNumber" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>"><br><br>
-             Type: <br><input type="text" name="Type" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"><br><br>
                Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
                 Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
 
