@@ -56,16 +56,17 @@
 		}
 		else 
 		{
+			fgets($handle);  // read one line for nothing (skip header)
 			while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
 			{
 
 				$spotId = $filesop[0];
-				$rentersName = $filesop[1];
-				$Location = $filesop[2];
-				$Type = $filesop[3];
+				$Location = $filesop[1];
+				$Type = $filesop[2];
+				$rentersName = $filesop[3];
 				$Building = $filesop[4];
 				$comments = $filesop[5];
-
+				
 				$query = "INSERT INTO `parking space` (`Spot Number`, `Location`, `Type`, `Resident Name`, `Building`, `comments`) VALUES ('".$spotId."', '".$Location."', '".$Type."', '".$rentersName."', '".$Building."', '".$comments."')";
 				@mysqli_query($dbc, $query);  //or die(mysqli_error($dbc));  
 			

@@ -41,8 +41,6 @@
 	
 <?php
 	}
-	
-
 
 	if (isset($_REQUEST['submit'])) 
 	{
@@ -63,20 +61,19 @@
 		}
 		else 
 		{
+			fgets($handle);  // read one line for nothing (skip header)
 			while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
 			{
-			  
-			  
-			     $residentName = $filesop[0];
-				 $apartmentNumber = $filesop[1];
-				 $leasingPeriod = $filesop[2];
-				 $building = $filesop[3];
-				 $parkingSpot = $filesop[4];
-				 $phoneNumber = $filesop[5];
-				 $email = $filesop[6];
-				 $Pets = $filesop[7];
-				 $Storage = $filesop[8];
-				 $comments = $filesop[9];
+				$apartmentNumber = $filesop[0];
+				$residentName = $filesop[1];
+				$building = $filesop[2];
+				$parkingSpot = $filesop[3];
+				$leasingPeriod = $filesop[4];
+				$phoneNumber = $filesop[5];
+				$email = $filesop[6];
+				$Pets = $filesop[7];
+				$Storage = $filesop[8];
+				$comments = $filesop[9];
   
 				$query = @"INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `Storage Unit`,`comments`) VALUES ('$apartmentNumber', '$residentName', '$building', '$parkingSpot', '$leasingPeriod', '$phoneNumber', '$email', '$pets',$Storage, '$comments')";
 				@mysqli_query($dbc, $query);  //or die(mysqli_error($dbc));  
