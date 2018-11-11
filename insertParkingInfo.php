@@ -102,7 +102,7 @@
 									<label for="renter">Renter's Name: </label>
 									<div class="input-group input-group-sm">
 										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>
-										<input required placeholder="Renters's Name" class="form-control" id="renter" type="text" name="renters_name" id="rentersName" pattern="[^\/;,*<>=+]*">
+										<input  value="TBD" class="form-control" id="renter" type="text" name="renters_name" id="rentersName" pattern="[^\/;,*<>=+]*">
 									</div>	
 								</div>										
 							</div>			
