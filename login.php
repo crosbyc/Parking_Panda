@@ -63,9 +63,11 @@ if (isset($_POST['username']) and isset($_POST['password'])){
     }
 }
 
+
 /*if (isset($_SESSION['username'])){
     $username = $_SESSION['username'];
 }*/
+
 
 
 ?>

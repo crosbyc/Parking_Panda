@@ -22,11 +22,13 @@
          $phoneNumber = $_POST['Phone_Number'];
          $email = $_POST['Email'];
          $Pets = $_POST['Pets'];
+		 $Storage = 9;
          $comments = $_POST['Comments'];
  
          $query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$pets."', '".$comments."', '".$Username."')";
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
+
      }
      mysqli_close($dbc);
 
@@ -87,38 +89,111 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4">
-                            <h5>* Indicates required field<br>
-                                <h3>Residents</h3>
-                                <!--form starts here-->
-                                <form action="insertResidentInfo.php" method='post'>
-                                    * Resident's Name: <br><input type="text" name="Residents_Name" pattern="[^\/;,*<>=+]*"><br>
-                                    * Apartment Number: <br><input type="text" name="Apartment_Number" id="apartmentNumber"
-                                        pattern="[^\/;,*<>=+]*"><br>
-                                    * Leasing Period: <br><input type="text" name="Leasing_Period" id="leasingPeriod"><br>
-                                    * Building: <br><input type="text" name="Building" id="building"
-                                        pattern="[^\/;,*<>=+]*"><br>
-                                    * Parking Spot: <br><input type="text" name="Parking_Spot" id="parkingSpot" pattern="[^\/;,*<>=+]*"><br>
-                                    * Phone Number: <br><input type="text" name="Phone_Number" id="phoneNumber"
-                                        pattern="[^\/;,*<>=+]*"><br>
-                                    * Email: <br><input type="text" name="Email" id="email"
-                                        pattern="[^\/;,*<>=+]*"><br>
-                                        * Pets: <br><input type="text" name="Pets" id="pets"
-                                        pattern="[^\/;,*<>=+]*"><br>
-                                        * comments: <br><textarea rows="4" cols="50" name="Comments" id="comments" pattern="[^\/;,*<>=+]*"></textarea><br>
-                                    <input type="submit" name="insert_resident_info" value="Insert"><br>
-                                    <br>
-                                    Download our Template
-                                    <input type="submit" name="download_template" value="Template"><br>
-                                    Upload Parking Information
-                                    <input type="submit" name="upload_parking_info" value="Upload"><br>
 
 
-                                </form>
-                        </div>
+                        <!--form starts here-->
+                        <form action="insertResidentInfo.php" method='post'>
+							<div class="row">
+								<div class="form-group col-lg-10 col-md-4 col-md-4 col-lg-4">
+									<label for="resident">* Resident's Name:</label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" ></span></span>
+										<input  required class="form-control" placeholder="Resident's Name" type="text" name="Residents_Name" id="resident" pattern="[^\/;,*<>=+]*"  >
+									</div>
+								</div>
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">								
+									<label for="apt">* Apartment Number:</label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1">#</span>
+										<input required class="form-control" id="apt" placeholder="Apartment Number" type="text" name="Apartment_Number" id="apartmentNumber"  pattern="[^\/;,*<>=+]*"/>
+									</div>
+								</div>
+							</div>
+										
+							<div class="row">
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
+									<label for="lpd">* Leasing Period:</label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" ></span></span>									
+										<input  required class="form-control" id="lpd" placeholder="Leasing Period"  type="text" name="Leasing_Period" id="leasingPeriod"/>
+									</div>
+								</div>	
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
+									<label for="bldg">* Building:</label> 
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home" ></span></span>									
+										<input  required class="form-control" id="bldg" placeholder="Building"  type="text" name="Building" id="building" pattern="[^\/;,*<>=+]*"/>
+									</div>
+								</div>
+							</div>
+									
+							<div class="row">
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
+									<label for="spot">* Parking Spot:</label> 
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-road" ></span></span>	
+										<input  required class="form-control" id="spot" placeholder="Parking Spot" type="text" name="Parking_Spot" id="parkingSpot" pattern="[^\/;,*<>=+]*"/>
+									</div>
+								</div>
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
+									<label for="phne">* Phone Number:</label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-earphone" ></span></span>			
+										<input required class="form-control" id="phne" placeholder="Phone Number" type="tel" name="Phone_Number" id="phoneNumber"   pattern="[^\/;,*<>=+]*"/>
+									</div>
+								</div>
+							</div>
+									
+							<div class="row">
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">								
+									<label for="eml">* Email:</label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope" ></span></span>									
+										<input required class="form-control" id="eml"  placeholder="Email Address" type="email" name="Email" id="email" pattern="[^\/;,*<>=+]*">
+									</div>
+								</div>
+								<div class="form-group col-lg-10 col-lg-4 col-md-4 col-lg-4">
+									<label for="pet">* Pets: </label>
+									<div class="input-group input-group-sm">
+										<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-piggy-bank" ></span></span>									
+										<input required class="form-control"  id="pet" placeholder="Number of Pets" type="text" name="Pets" id="pets" pattern="[^\/;,*<>=+]*">
+									</div>
+								</div>
+							</div> 
+							<div class="row">		    
+								<div class="form-group col-lg-8 col-md-8 col-lg-8">
+									<label for="comments">Comment:</label>
+									<textarea class="form-control" name="Comments" rows="3"  id="comments"></textarea>
+								</div>
+							</div>
+							<div class="row">
+								<button  type="submit" class="btn btn-primary btn-lg" name="insert_resident_info">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Add Resident
+								</button> 
+							</div>
+						</form>
+
+			   
                     </div>
                 </div>
-
+				
+<?php if(isset($uploadMsg)) : ?>
+	<div class="alert alert-danger">
+		<?=$uploadMsg?>
+		<?php unset($uploadMsg); ?>
+	</div>
+<?php endif; ?>	
+				
+				<div class="row" style="margin-top:10px" style="display:inline;">
+					<form	action="uploadTemplate.php" method='post' style="display:inline;">
+						<button style="margin-left:25%"  type="submit"  class="btn btn-default btn-lg" name="upload_" >
+						<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From File</button>
+					</form>
+					<form	action="getResidentInfo.php" method='post' style="display:inline;">
+						<button  style="margin-left:5%"  type="submit" class="btn btn-default btn-lg" name="download_template" >
+						<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Download Template</button>
+					</form>	
+				</div>
 
                 <!-- Bootstrap core JavaScript
     ================================================== -->

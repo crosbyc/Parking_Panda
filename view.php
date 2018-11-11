@@ -6,13 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="icon" href="../../favicon.ico">-->
-
     <title>View Parking Info</title>
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
@@ -134,7 +131,7 @@ if ($result->num_rows > 0) {
                                         <div class="table responsive">
                                         <thead>
                                         <tr>
-                                            <th>Apartment Numner</th>
+                                            <th>Apartment Number</th>
                                             <th>Resident Name</th>
                                             <th>Building</th>
                                             <th>Parking Spot</th>
@@ -200,8 +197,14 @@ if ($result->num_rows > 0) {
                                     <div class="row">
                                         <div class="col">
                                             <form method="post">
-                                                <input type="checkbox" name="showAvailable" value="Show"> Show Available Spots<br>
-                                                <input name="submit" type="submit" value="submit" />
+												<div class="input-group">
+												  <span class="input-group-addon">
+													<input type="checkbox" name="showAvailable" value="Show"> Show Available Spots</input>
+												  </span>
+												  <button type="submit"  class="btn btn-primary btn-sm" name="submit" >
+												  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit</button>
+
+												</div><!-- /input-group -->
                                             </form>
 <?php
 if (isset($_POST['showAvailable'])){
@@ -227,21 +230,24 @@ if (!$result) {
 }
 if ($result->num_rows > 0) {
     // output data of each row
-    while($row = $result->fetch_assoc()) {
-
-
-        echo '<tr>
-                  <td scope="row">' . $row["Spot Number"]. '</td>
-                  <td>' . $row["Location"] .'</td>
-                  <td> '.$row["Type"] .'</td>
-                  <td> '.$row["Resident Name"] .'</td>
-                  <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>
-                </tr>
-                <br>
-                <form action="assignParking.php">
-                    <input type="submit" value="Assign Parking" />
-                </form>';
+    while($row = $result->fetch_assoc()) 
+	{
+        echo 
+			'<tr>
+				<td scope="row">' . $row["Spot Number"]. '</td>
+				<td>' . $row["Location"] .'</td>
+				<td> '.$row["Type"] .'</td>
+				<td> '.$row["Resident Name"] .'</td>
+				<td> '.$row["Building"] .'</td>
+				<td> '.$row["comments"] .'</td>
+				<td>
+			
+					<form action="assignParking.php">
+						<button type="submit"  class="btn btn-primary btn-sm" name="location" value=$row["Spot Number"]>
+						<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span> Assign Parking</button>
+					</form>
+				</td>
+			</tr>';
     }
 } else {
     echo '0 results

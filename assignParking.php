@@ -5,24 +5,30 @@
    header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
    die;
 }*/
-    if (isset($_POST['Renters_Name']) && isset($_POST['Unit_Number']) && isset($_POST['Phone_Number']) && isset($_POST['Building']) && isset($_POST['comments'])){
-        /*
-         $username = $_SESSION['username'];
-         if($username == ''){
-              mysqli_close($dbc);
-             header('Location: http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php');
-         }
-         */
-         $rentersName = $_POST['Renters_Name'];
-         $unitNumber = $_POST['Unit_Number'];
-         $phoneNumber = $_POST['Phone_Number'];
+    if (isset($_POST['renterName']) && isset($_POST['aptNo']) && isset($_POST['phoneNo']))
+	{
+		
+         $rentersName = $_POST['renterName'];
+         $unitNumber = $_POST['aptNo'];
+         $phoneNumber = $_POST['phoneNo'];
  
-         $renterQuery = "SELECT * FROM `renters` WHERE `Renters Name`='$rentersName', `Appartment Number`='$unitNumber', `Phone Number`='$phoneNumber'";
-         mysqli_query($dbc, $renterQuery)or die(mysqli_error($dbc));
-     }
-     mysqli_close($dbc);
+         $renterQuery = "SELECT * FROM `resident` WHERE `Name`='$rentersName' AND `Appartment Number`='$unitNumber' AND `Phone Number`='$phoneNumber'";
+         $result = mysqli_query($dbc, $renterQuery)or die(mysqli_error($dbc));
+		 
+		 $count = mysqli_num_rows($result);
+		 
+		if ($count >= 1)
+		{
+			header('Location: updateParking.php');
+		}
+		else{
+			$fmsg = "Invalid Resident data enterd. Plese verify resident information";
+		}
+	}
+	mysqli_close($dbc ); 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,14 +87,40 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5>* Indicates required field<br>
-                                <h3>Resident Information</h3>
+                                <h3>Resident Information</h3><br>
                                 <!--form starts here-->
-                                <form action="insertParkingInfo.php" method='post'>
-                                    * What is the Renters Name? <br><input type="text" name="Renters_Name" pattern="[^\/;,*<>=+]*"><br>
-                                    * What is their Unit Number? <br><input type="text" name="Unit_Number" id="rentersName" pattern="[^\/;,*<>=+]*"><br>
-                                    * What is their Phone Number? <br><input type="text" name="Phone_Number" id="Loc" pattern="[^\/;,*<>=+]*"><br>
-                                    <input type="button" onclick="location.href='updateParking.php';" value="Assign A Parking Spot" />
-                            </form>
+								
+									<form action="assignParking.php" method='post'>
+										* What is the Renters Name? <br>
+										<div class="input-group input-group-lg">
+											<span class="input-group-addon" id="basic-addon1">@</span>
+											<input type="text"  class="form-control" placeholder="Renter Name" name="renterName" id="username" pattern="[^\/;,*<>=+]*"/>
+										</div></br>
+										* What is their Unit Number? <br>
+										<div class="input-group input-group-lg">
+											<span class="input-group-addon" id="basic-addon1">@</span>
+											<input type="text" class="form-control" placeholder="Apartment Number" name="aptNo" id="rentersName" pattern="[^\/;,*<>=+]*" />
+										</div></br>
+										* What is their Phone Number? <br>
+										<div class="input-group input-group-lg"><span class="input-group-addon" id="basic-addon1">
+											<span class="glyphicon glyphicon-earphone" ></span></span>
+											<input type="tel" class="form-control" placeholder="Phone Number" name="phoneNo" id="Loc" pattern="[^\/;,*<>=+]*" />
+										</div></br>
+										<button type="submit" class="btn btn-default btn-lg" name="submitAssign">
+											<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Assign A Parking Spot
+										</button> 
+									</form>
+								
+																
+									<?php if(isset($fmsg)): ?>
+										<div class="alert alert-danger" role="alert">
+										  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+										  <span class="sr-only">Error:</span>
+											<?="$fmsg"?>
+										</div>
+									<?php endif; ?>							
+							
+									<?php unset($fmsg); ?>
                         </div>
                     </div>
                 </div>
