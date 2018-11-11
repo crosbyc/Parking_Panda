@@ -38,31 +38,36 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 */
 // Include config file
+session_start();
 require ('mysqli_connect.php');
 if (isset($_POST['username']) and isset($_POST['password'])){
     $_SESSION['login'] = true;
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM `users` WHERE Name='$username' and Password=SHA1('$password')";
+    $query = "SELECT * FROM `users` WHERE Email='$username' or Name='$username'and Password=SHA1('$password')";
+
     
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
 
     $count = mysqli_num_rows($result);
-//If the posted values are equal to the database values, then the session will be created for the user.
+    //If the posted values are equal to the database values, then the session will be created for the user.
     if ($count == 1){
         $_SESSION['username'] = $username;
 
         header('Location: view.php');
-
+      
+        //http://localhost/Parking_Panda/view.html
     }else{
-        $fmsg = "Login Failed. Invalid Login Credentials.";
+      $fmsg = "Login Failed. Invalid Login Credentials.";
     }
 }
 
-	if (isset($_SESSION['username'])){
+
+/*if (isset($_SESSION['username'])){
     $username = $_SESSION['username'];
-	}
+}*/
+
 
 
 ?>
@@ -130,14 +135,12 @@ if (isset($_POST['username']) and isset($_POST['password'])){
               <input type="password" name="password" pattern="[^\/;,*<>=+]*" id="inputPassword" class="form-control"><br><br>
               <input type="submit" name="submitLogIn" value="Log In">
             </form>
-			
-<?php if(isset($fmsg)) : ?>
+            <?php if(isset($fmsg)) : ?>
 	<div class="alert alert-danger">
 		<?=$fmsg?>
 		<?php unset($fmsg); ?>
 	</div>
-<?php endif; ?>			
-			
+<?php endif; ?>
           </div>
         </div>
       </div>

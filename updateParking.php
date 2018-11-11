@@ -47,7 +47,7 @@
                     <li class="view.php"><a href="#">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
-                    <li><a href="delete.html">Delete Parking or Resident Info</a></li>
+                    <li><a href="RegisterAssistant.php">Register Office Assistant</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -131,12 +131,12 @@ if ($result->num_rows > 0) {
                                     <tbody>
 <?php
 // Create connection
-//session_start();
+session_start();
 require('mysqli_connect.php');
-/*if(!$_SESSION['login']){
+if(!$_SESSION['login']){
    header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
    die;
-}*/
+}
 //$con=mysqli_connect("mysqli_connect.php");
 // Check connection
 if (mysqli_connect_errno())
