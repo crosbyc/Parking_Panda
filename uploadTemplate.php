@@ -1,5 +1,10 @@
 <?php
+    session_start();
 	require('mysqli_connect.php');
+    if(!$_SESSION['login']){
+		header("location:login.php");
+		die;
+	}
 	  
 	if (isset($_REQUEST['upload_'])) 
 	{
