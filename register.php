@@ -2,40 +2,40 @@
 // require once like a config file he will create
 require_once "mysqli_connect.php";
 // If the values are posted, insert them into the database.
+
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['phoneNumber'])){
+
     $username = $_POST['username'];
     $email = $_POST['email'];
     $phoneNumber = $_POST['phoneNumber'];
     $password = $_POST['password'];
+
     $type = "Office Manager";
 
 
     $query = "INSERT INTO `users` (Name, Password, Email, Type, `Phone Number`) VALUES ('$username', SHA1('$password'), '$email', '$type', '$phoneNumber')";
     $result = mysqli_query($dbc, $query);
+		
+	$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";
+	$e_CheckRes = mysqli_query($dbc, $emailCheck);
+  	
+	if ($password !== $password) {
+		$fmsg ="Sorry! Confirmation password does not match..Try again";
+	}
+	else if(mysqli_num_rows($e_CheckRes) > 0 ){
+		$fmsg ="Sorry! This email account already exist..Try another";
+	}
 
-    if($result){
+    else if(mysqli_query($dbc, $query)){
         $smsg = "User Created Successfully.";
-        header('Location: http://localhost/Parking_Panda_v2/login.php');
-    }else{
+        header('Location: login.php');
+   }else{
+
         $fmsg ="User Registration Failed";
     }
     mysqli_close($dbc);
 }
 
-
-    /*
-    if (isset($_POST['username']) && isset($_POST['password'])){
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        if($username == "Test" && $email == "Test@gmail.com" && $password == "password" && isset($_POST['submit'])){
-            $smsg = "User Created Successfully.";
-             header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/login.php'); 
-             exit;
-        }else{
-            $fmsg ="User Registration Failed";
-        }
-    */
 
 ?>
 
@@ -101,6 +101,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
           <div class="col-md-6">
             <h4>If You Do Not Have an Account - <br> Please Create One Using the Form Below:</h4>
             <!-- Write a PHP script to store new log in info in mySQL db -->
+
             <form action="register.php" method="post">
               Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
              Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
@@ -109,8 +110,18 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
                Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
                 Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
 
+
                 <input type="submit" name="submit" value="Register"><br>
             </form>
+			
+<?php if(isset($fmsg)) : ?>
+	<div class="alert alert-danger">
+		<?=$fmsg?>
+		<?php unset($fmsg); ?>
+	</div>
+<?php endif; ?>
+		
+			
           </div>
         </div>
       </div>

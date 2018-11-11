@@ -47,7 +47,6 @@ if (isset($_POST['username']) and isset($_POST['password'])){
 
     $query = "SELECT * FROM `users` WHERE Email='$username' or Name='$username'and Password=SHA1('$password')";
 
-
     
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
 
@@ -57,6 +56,7 @@ if (isset($_POST['username']) and isset($_POST['password'])){
         $_SESSION['username'] = $username;
 
         header('Location: view.php');
+      
         //http://localhost/Parking_Panda/view.html
     }else{
       $fmsg = "Login Failed. Invalid Login Credentials.";
