@@ -10,7 +10,7 @@ unset($_SESSION['username']);
 session_destroy();
 
 // Jump to login page
-header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/login.php');
+header('Location: http://localhost/Parking_Panda_V2/login.php');
 
 
 ?>

@@ -1,18 +1,14 @@
 <?php
-  //  session_start();
+    session_start();
 	require('mysqli_connect.php');
-    /*if(!$_SESSION['login']){
+    if(!$_SESSION['login']){
    header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
    die;
-}*/
+}
     if (isset($_POST['spot_id']) && isset($_POST['Location']) && isset($_POST['Type']) && isset($_POST['Building']) && isset($_POST['comments'])){
-        /*
+        
          $username = $_SESSION['username'];
-         if($username == ''){
-              mysqli_close($dbc);
-             header('Location: http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php');
-         }
-         */
+
          $spotId = $_POST['spot_id'];
          $rentersName = "TBD";
          $Location = $_POST['Location'];
@@ -20,7 +16,7 @@
          $Building = $_POST['Building'];
          $comments = $_POST['comments'];
  
-         $query = "INSERT INTO `parking space` (`Spot Number`, `Location`, `Type`, `Resident Name`, `Building`, `comments`) VALUES ('".$spotId."', '".$Location."', '".$Type."', '".$rentersName."', '".$Building."', '".$comments."')";
+         $query = "INSERT INTO `parking space` (`Spot Number`, `Location`, `Type`, `Resident Name`, `Building`, `comments`, `userName`) VALUES ('".$spotId."', '".$Location."', '".$Type."', '".$rentersName."', '".$Building."', '".$comments."', '".$username."')";
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
      }
@@ -75,7 +71,7 @@
                     <li class="view.php"><a href="view.php">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="active">Add Parking Information</a></li>
-                    <li><a href="delete.html">Delete Parking or Resident Info</a></li>
+                    <li><a href="RegisterAssistant.php">Register Office Assistant</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
