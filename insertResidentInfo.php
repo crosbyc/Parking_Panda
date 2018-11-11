@@ -2,7 +2,7 @@
     session_start();
 	require('mysqli_connect.php');
     if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
+   header("location:login.php");
    die;
 }
     if (isset($_POST['Residents_Name']) && isset($_POST['Apartment_Number']) && isset($_POST['Leasing_Period']) && isset($_POST['Building']) && isset($_POST['Phone_Number']) && isset($_POST['Email']) && isset($_POST['Pets'])){
@@ -24,8 +24,9 @@
          $Pets = $_POST['Pets'];
 		 $Storage = 9;
          $comments = $_POST['Comments'];
- 
-         $query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$pets."', '".$comments."', '".$Username."')";
+         
+		 //insert command is giving php error so supress with @ command
+         @$query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$pets."', '".$comments."', '".$Username."')";
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
 

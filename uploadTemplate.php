@@ -64,6 +64,7 @@
 			fgets($handle);  // read one line for nothing (skip header)
 			while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
 			{
+				$Username = $_SESSION['username'];
 				$apartmentNumber = $filesop[0];
 				$residentName = $filesop[1];
 				$building = $filesop[2];
@@ -75,7 +76,8 @@
 				$Storage = $filesop[8];
 				$comments = $filesop[9];
   
-				$query = @"INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `Storage Unit`,`comments`) VALUES ('$apartmentNumber', '$residentName', '$building', '$parkingSpot', '$leasingPeriod', '$phoneNumber', '$email', '$pets',$Storage, '$comments')";
+				$query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$pets."', '".$comments."', '".$Username."')";
+
 				@mysqli_query($dbc, $query);  //or die(mysqli_error($dbc));  
 			
 			}

@@ -88,7 +88,7 @@
 
 //echo $Type;
 if(!$_SESSION['login']){
-   header("location:http://localhost/Parking_Panda_V2/login.php");
+   header("location:login.php");
    die;
 }
 //$con=mysqli_connect("mysqli_connect.php");
@@ -97,7 +97,7 @@ if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-//$Username = $_SESSION['username'];
+$Username2 = $_SESSION['username'];
 $query2 = "SELECT * FROM `parking space` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
@@ -111,7 +111,8 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Location"] .'</td>
                   <td> '.$row["Type"] .'</td>
                   <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>';
+                  <td> '.$row["comments"] .'</td>
+		</tr>';
     //$query3 = "SELECT `Type` FROM `users` WHERE `username`= '$Username'";
     }
 } else {
@@ -157,7 +158,7 @@ if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-//$Username = $_SESSION['username'];
+$Username2 = $_SESSION['username'];
 $query2 = "SELECT * FROM `resident` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
@@ -175,7 +176,7 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Email Address"] .'</td>
                   <td> '.$row["Pets"] .'</td>
                   <td> '.$row["comments"] .'</td>';
-                  $query3 = "SELECT `type` FROM `users` WHERE `username`= '$Username'";
+                  $query3 = "SELECT `type` FROM `users` WHERE `username`= '$Username2'";
     if($query3 == "Office Manager"){
         echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
         </tr>';
@@ -223,7 +224,8 @@ if (isset($_POST['showAvailable'])){
                                     </thead>
                                     <tbody>';
 $toBeDetermined = "TBD";
-$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `userName`= '$Username'";
+$Username2 = $_SESSION['username'];
+$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `userName`= '$Username2'";
 $result = mysqli_query($dbc,$query2);
 if (!$result) {
     trigger_error('Invalid query: ');
