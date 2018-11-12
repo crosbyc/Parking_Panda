@@ -6,13 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="icon" href="../../favicon.ico">-->
-
     <title>View Parking Info</title>
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
@@ -91,7 +88,7 @@
 
 //echo $Type;
 if(!$_SESSION['login']){
-   header("location:http://localhost/Parking_Panda_V2/login.php");
+   header("location:login.php");
    die;
 }
 //$con=mysqli_connect("mysqli_connect.php");
@@ -100,7 +97,7 @@ if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-//$Username = $_SESSION['username'];
+$Username2 = $_SESSION['username'];
 $query2 = "SELECT * FROM `parking space` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
@@ -114,7 +111,8 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Location"] .'</td>
                   <td> '.$row["Type"] .'</td>
                   <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>';
+                  <td> '.$row["comments"] .'</td>
+		</tr>';
     //$query3 = "SELECT `Type` FROM `users` WHERE `username`= '$Username'";
     }
 } else {
@@ -134,7 +132,7 @@ if ($result->num_rows > 0) {
                                         <div class="table responsive">
                                         <thead>
                                         <tr>
-                                            <th>Apartment Numner</th>
+                                            <th>Apartment Number</th>
                                             <th>Resident Name</th>
                                             <th>Building</th>
                                             <th>Parking Spot</th>
@@ -160,7 +158,7 @@ if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-//$Username = $_SESSION['username'];
+$Username2 = $_SESSION['username'];
 $query2 = "SELECT * FROM `resident` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
@@ -178,7 +176,9 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Email Address"] .'</td>
                   <td> '.$row["Pets"] .'</td>
                   <td> '.$row["comments"] .'</td>';
+
                   $query3 = "SELECT `type` FROM `users` WHERE `username`= '". $Username2. "'";
+      
     if($query3 == "Office Manager"){
         echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
         </tr>';
@@ -200,8 +200,14 @@ if ($result->num_rows > 0) {
                                     <div class="row">
                                         <div class="col">
                                             <form method="post">
-                                                <input type="checkbox" name="showAvailable" value="Show"> Show Available Spots<br>
-                                                <input name="submit" type="submit" value="submit" />
+												<div class="input-group">
+												  <span class="input-group-addon">
+													<input type="checkbox" name="showAvailable" value="Show"> Show Available Spots</input>
+												  </span>
+												  <button type="submit"  class="btn btn-primary btn-sm" name="submit" >
+												  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit</button>
+
+												</div><!-- /input-group -->
                                             </form>
 <?php
 if (isset($_POST['showAvailable'])){
@@ -220,28 +226,33 @@ if (isset($_POST['showAvailable'])){
                                     </thead>
                                     <tbody>';
 $toBeDetermined = "TBD";
+
 $query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `userName`= '". $Username2. "'";
+
 $result = mysqli_query($dbc,$query2);
 if (!$result) {
     trigger_error('Invalid query: ');
 }
 if ($result->num_rows > 0) {
     // output data of each row
-    while($row = $result->fetch_assoc()) {
-
-
-        echo '<tr>
-                  <td scope="row">' . $row["Spot Number"]. '</td>
-                  <td>' . $row["Location"] .'</td>
-                  <td> '.$row["Type"] .'</td>
-                  <td> '.$row["Resident Name"] .'</td>
-                  <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>
-                </tr>
-                <br>
-                <form action="assignParking.php">
-                    <input type="submit" value="Assign Parking" />
-                </form>';
+    while($row = $result->fetch_assoc()) 
+	{
+        echo 
+			'<tr>
+				<td scope="row">' . $row["Spot Number"]. '</td>
+				<td>' . $row["Location"] .'</td>
+				<td> '.$row["Type"] .'</td>
+				<td> '.$row["Resident Name"] .'</td>
+				<td> '.$row["Building"] .'</td>
+				<td> '.$row["comments"] .'</td>
+				<td>
+			
+					<form action="assignParking.php">
+						<button type="submit"  class="btn btn-primary btn-sm" name="location" value=$row["Spot Number"]>
+						<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span> Assign Parking</button>
+					</form>
+				</td>
+			</tr>';
     }
 } else {
     echo '0 results
