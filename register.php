@@ -16,6 +16,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['C_pa
 	if ($C_password !== $password) {
 		$fmsg ="Sorry! Confirmation password does not match..Try again";
 	}
+
 	else 
 	{
 		$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";

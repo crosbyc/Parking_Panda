@@ -24,9 +24,9 @@
          $Pets = $_POST['Pets'];
 		 $Storage = 9;
          $comments = $_POST['Comments'];
-         
-		 //insert command is giving php error so supress with @ command
-         @$query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$pets."', '".$comments."', '".$Username."')";
+ 
+         $query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$Pets."', '".$comments."', '".$Username."')";
+
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
 

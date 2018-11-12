@@ -45,14 +45,14 @@ if (isset($_POST['username']) and isset($_POST['password'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM `users` WHERE Email='$username' or Name='$username'and Password=SHA1('$password')";
+    $query = "SELECT * FROM `users` WHERE Email='$username' or Name='$username' and Password=SHA1('$password')";
 
     
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
 
     $count = mysqli_num_rows($result);
     //If the posted values are equal to the database values, then the session will be created for the user.
-    if ($count == 1){
+    if ($count > 1){
         $_SESSION['username'] = $username;
 
         header('Location: view.php');

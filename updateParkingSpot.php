@@ -17,8 +17,10 @@
          $rentersName = $_POST['renters_name'];
          
          $query = "UPDATE `parking space` SET `Resident Name`='$rentersName' WHERE `Spot Number`='$spotId'"; 
+         $query2 = "UPDATE `resident` SET `Parking Spot`='$spotId' WHERE `Name`='$rentersName'";
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
+         mysqli_query($dbc, $query2)or die(mysqli_error($dbc));
      }
      mysqli_close($dbc);
 
