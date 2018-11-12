@@ -178,7 +178,7 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Email Address"] .'</td>
                   <td> '.$row["Pets"] .'</td>
                   <td> '.$row["comments"] .'</td>';
-                  $query3 = "SELECT `type` FROM `users` WHERE `username`= '$Username'";
+                  $query3 = "SELECT `type` FROM `users` WHERE `username`= '". $Username2. "'";
     if($query3 == "Office Manager"){
         echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
         </tr>';
@@ -220,7 +220,7 @@ if (isset($_POST['showAvailable'])){
                                     </thead>
                                     <tbody>';
 $toBeDetermined = "TBD";
-$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `userName`= '$Username'";
+$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `userName`= '". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
 if (!$result) {
     trigger_error('Invalid query: ');

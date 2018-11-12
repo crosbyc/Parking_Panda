@@ -10,7 +10,7 @@ unset($_SESSION['username']);
 session_destroy();
 
 // Jump to login page
-header('Location: http://localhost/Parking_Panda_V2/login.php');
+header('Location: login.php');
 
 
 ?>

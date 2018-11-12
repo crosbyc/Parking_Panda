@@ -22,9 +22,9 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
 	if ($password !== $password) {
 		$fmsg ="Sorry! Confirmation password does not match..Try again";
 	}
-	else if(mysqli_num_rows($e_CheckRes) > 0 ){
+/*	else if(mysqli_num_rows($e_CheckRes) > 0 ){
 		$fmsg ="Sorry! This email account already exist..Try another";
-	}
+	}*/
 
     else if(mysqli_query($dbc, $query)){
         $smsg = "User Created Successfully.";

@@ -1,3 +1,7 @@
+<?php
+// Create connection
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +48,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="view.php"><a href="#">View Parking Information</a></li>
+                    <li><a href="view.php">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
                     <li><a href="RegisterAssistant.php">Register Office Assistant</a></li>
@@ -131,20 +135,20 @@ if ($result->num_rows > 0) {
                                     <tbody>
 <?php
 // Create connection
-session_start();
-require('mysqli_connect.php');
+
 if(!$_SESSION['login']){
    header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
    die;
 }
 //$con=mysqli_connect("mysqli_connect.php");
 // Check connection
+require('mysqli_connect.php');
 if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-//$Username = $_SESSION['username'];
-$query2 = "SELECT * FROM `resident`";
+$Username = $_SESSION['username'];
+$query2 = "SELECT * FROM `resident` WHERE `username`= '". $Username. "'";
 $result = mysqli_query($dbc,$query2);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -198,7 +202,7 @@ if (isset($_POST['showAvailable'])){
                                     </thead>
                                     <tbody>';
 $toBeDetermined = "TBD";
-$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined'";
+$query2 = "SELECT * FROM `parking space` WHERE `Resident Name`= '$toBeDetermined' and `username`= '". $Username. "'";
 $result = mysqli_query($dbc,$query2);
 if (!$result) {
     trigger_error('Invalid query: ');
