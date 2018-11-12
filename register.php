@@ -3,36 +3,43 @@
 require_once "mysqli_connect.php";
 // If the values are posted, insert them into the database.
 
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['phoneNumber'])){
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['C_password']) && isset($_POST['email']) && isset($_POST['phoneNumber'])){
 
     $username = $_POST['username'];
     $email = $_POST['email'];
     $phoneNumber = $_POST['phoneNumber'];
     $password = $_POST['password'];
-
+	$C_password = $_POST['C_password'];
     $type = "Office Manager";
 
-
-    $query = "INSERT INTO `users` (Name, Password, Email, Type, `Phone Number`) VALUES ('$username', SHA1('$password'), '$email', '$type', '$phoneNumber')";
-    $result = mysqli_query($dbc, $query);
-		
-	$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";
-	$e_CheckRes = mysqli_query($dbc, $emailCheck);
-  	
-	if ($password !== $password) {
+    //check confirmation password here
+	if ($C_password !== $password) {
 		$fmsg ="Sorry! Confirmation password does not match..Try again";
 	}
-	else if(mysqli_num_rows($e_CheckRes) > 0 ){
-		$fmsg ="Sorry! This email account already exist..Try another";
-	}
+	else 
+	{
+		$emailCheck = "SELECT * FROM `users` WHERE Email='$email'";
+		$e_CheckRes = mysqli_query($dbc, $emailCheck);
+		
+		//query to see if email aready exists		
+		if(mysqli_num_rows($e_CheckRes) > 0 ){
+			$fmsg ="Sorry! This email account already exist..Try another";
+		}
+		else
+		{
+			//insert new user here
+			$query = "INSERT INTO `users` (Name, Password, Email, Type, `Phone Number`) VALUES ('$username', SHA1('$password'), '$email', '$type', '$phoneNumber')";
+			$result = mysqli_query($dbc, $query);
+	
+			if($result){
+				$smsg = "User Created Successfully.";
+				header('Location: login.php');
+		   }else{
 
-    else if(mysqli_query($dbc, $query)){
-        $smsg = "User Created Successfully.";
-        header('Location: login.php');
-   }else{
-
-        $fmsg ="User Registration Failed";
-    }
+				$fmsg ="User Registration Failed";
+			}
+		}	
+	}		
     mysqli_close($dbc);
 }
 
@@ -78,8 +85,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <!--<li><a href="#">FAQs</a></li>-->
-          <!--<li><a href="squareftcalc.php">Area Calculator</a></li>-->
         </ul>
       </div>
     </div>
@@ -96,35 +101,90 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <h1 class="page-header text-center">Welcome to Parking Panda</h1>
+   
+        <div class="row " style="margin-left:15%">
+			<div class="col-sm-6">
 
-        <div class="row ">
-          <div class="col-md-6">
-            <h4>If You Do Not Have an Account - <br> Please Create One Using the Form Below:</h4>
-            <!-- Write a PHP script to store new log in info in mySQL db -->
+				<div class="row main">
+					<div class="main-login main-center">
+						<form class="form-horizontal" method="post" action="register.php">
+							
+							<div class="form-group">
+								<label for="name" class="cols-sm-2 control-label">Your User Name</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
+										<input required type="text" class="form-control" name="username" id="name"  placeholder="Enter your User Name" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"/>
+									</div>
+								</div>
 
-            <form action="register.php" method="post">
-              Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
-             Email Adress: <br><input type="text" name="email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"><br><br>
-             Phone Number: <br><input type="text" name="phoneNumber" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>"><br><br>
-             Type: <br><input type="text" name="Type" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"><br><br>
-               Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
-                Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
+								<label for="email" class="cols-sm-2 control-label">Your Email</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-envelope" ></span></span>
+										<input required type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>"/>
+									</div>
+								</div>
+
+								<label for="pne" class="cols-sm-2 control-label">Phone Number</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-phone" ></span></span>
+										<input required type="tel" class="form-control" name="phoneNumber" id="pne"  placeholder="Enter your Phone No" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>"/>
+									</div>
+								</div>
+
+								<label for="typ" class="cols-sm-2 control-label">Type</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-ok" ></span></span>
+										<input required type="text" class="form-control" id="typ" name="Type" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"/>
+									</div>
+								</div>
+
+								<label for="password" class="cols-sm-2 control-label">Password</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock" ></span></span>
+										<input required type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"/>
+									</div>
+								</div>
+
+								<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock" ></span></span>
+										<input required type="password" class="form-control" name="C_password" id="confirm"  placeholder="Confirm your Password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['C_password'])) echo $_POST['C_password']; ?>"/>
+									</div>
+								</div>
 
 
-                <input type="submit" name="submit" value="Register"><br>
-            </form>
-			
+							<div style="margin-top:10%">
+								<button type="submit" name="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+							</div>
+							<div class="login-register">
+								<a href="login.php">Login</a>
+							 </div>
+						</form>
 <?php if(isset($fmsg)) : ?>
 	<div class="alert alert-danger">
 		<?=$fmsg?>
 		<?php unset($fmsg); ?>
 	</div>
-<?php endif; ?>
+<?php endif; ?>						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+			
+
 		
 			
-          </div>
-        </div>
-      </div>
+ 
+       
+   
     </div>
   </div>
   <!-- Bootstrap core JavaScript

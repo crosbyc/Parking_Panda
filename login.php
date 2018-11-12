@@ -174,28 +174,17 @@ if (isset($_POST['username']) and isset($_POST['password'])){
 						Don't have an account! <a href="register.php" onClick=""> Sign Up Here </a>
 					</div>
                 </div>
-			</div>
-		</div>
-	</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-            <?php if(isset($fmsg)) : ?>
+				 <?php if(isset($fmsg)) : ?>
 	<div class="alert alert-danger">
 		<?=$fmsg?>
 		<?php unset($fmsg); ?>
 	</div>
 <?php endif; ?>
+			</div>
+		</div>
+	</div>
+			
+
           </div>
         </div>
       </div>
