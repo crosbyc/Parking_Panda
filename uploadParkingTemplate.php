@@ -5,42 +5,6 @@
 		header("location:login.php");
 		die;
 	}  
-	if (isset($_REQUEST['upload_'])) 
-	{
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Upload</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-	<link rel='icon' href='img/panda.ico' type='image/x-icon'/ >		
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-</head>
-	<body>
-		<h1 class="page-header text-center">Select File</h1>
-	    <form action="uploadParkingTemplate.php" method="post" enctype="multipart/form-data">
-		
-			<input  class="file btn btn-sm btn-default" type="file" name="fileToUpload" style="display:inline;">  
-			<div class="input-group input-group-sm" style="margin-left:10%">
-				<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-upload" ></span></span>
-				<input class="file btn btn-sm btn-info" type="submit" name="submit" value="Upload" >
-			</div>
-	    </form>
-	</body>
-</html>	
-	
-<?php
-	}
-	
-
 
 	if (isset($_REQUEST['submit'])) 
 	{
@@ -82,3 +46,4 @@
   }
 
 ?>
+
