@@ -149,11 +149,11 @@
 
 						<div class="row " align="center" style="margin-top:10px" style="display:inline;">
 	
-								<button style="margin-left:0%"  type="submit"  class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" name="upload_" >
+								<button   type="submit"  class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" name="upload_" >
 								<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From A File</button>
 							
 							<form	action="getParkingInfo.php" method='post' style="display:inline;">	
-								<button  style="margin-left:0%"  type="submit" class="btn btn-default btn-lg" name="download_template" >
+								<button    type="submit" class="btn btn-default btn-lg" name="download_template" >
 								<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Download Template</button>
 							</form>
 						</div>
