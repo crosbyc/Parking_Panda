@@ -55,7 +55,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phon
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
-
+	<link rel='icon' href='img/panda.ico' type='image/x-icon'/ >
   <!-- Custom styles for this template -->
   <link href="dashboard.css" rel="stylesheet">
 
