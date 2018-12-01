@@ -80,7 +80,7 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <li class="view.php"><a href="view.php">View Parking Information</a></li>
-                    <li><a href="active">Add Resident Informatoin</a></li>
+                    <li class="active"><a href="#">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
                     <li><a href="RegisterAssistant.php">Register Office Assistant</a></li>
                 </ul>
