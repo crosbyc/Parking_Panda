@@ -52,7 +52,7 @@ if (isset($_POST['username']) and isset($_POST['password'])){
 
     $count = mysqli_num_rows($result);
     //If the posted values are equal to the database values, then the session will be created for the user.
-    if ($count > 1){
+    if ($count >= 1){
         $_SESSION['username'] = $username;
 
         header('Location: view.php');
