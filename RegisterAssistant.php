@@ -3,6 +3,9 @@
 session_start();
 
 require_once "mysqli_connect.php";
+
+unset($fmsg);
+
 // If the values are posted, insert them into the database.
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phoneNumber'])){
     $username = $_POST['username'];
@@ -48,7 +51,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phon
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<link rel="icon" href="../../favicon.ico">-->
 
   <title>Panking Panda</title>
 
@@ -98,21 +100,70 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phon
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <h1 class="page-header text-center">Welcome to Parking Panda</h1>
+		
+        <div class="row " style="margin-left:15%">
+			<div class="col-sm-6">
 
-        <div class="row ">
-          <div class="col-md-6">
-            <h4>If You Do Not Have an Account - <br> Please Create One Using the Form Below:</h4>
-            <!-- Write a PHP script to store new log in info in mySQL db -->
-            <form action="RegisterAssistant.php" method="post">
-              Create User name: <br><input type="text" name="username" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"><br><br>
-             Phone Number: <br><input type="text" name="phoneNumber" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>"><br><br>
-               Create Password: <br><input type="password" name="password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
-                Confirm Password: <br><input type="password" name="confirm password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"><br><br>
+				<div class="row main">
+					<div class="main-login main-center">
+						<form class="form-horizontal" method="post" action="RegisterAssistant.php">
+							
+							<div class="form-group">
+								<label for="name" class="cols-sm-2 control-label">Your User Name</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
+										<input required type="text" class="form-control" name="username" id="name"  placeholder="Enter your User Name" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"/>
+									</div>
+								</div>
 
-                <input type="submit" name="submit" value="Register"><br>
-            </form>
-          </div>
-        </div>
+								<label for="pne" class="cols-sm-2 control-label">Phone Number</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-phone" ></span></span>
+										<input required type="tel" class="form-control" name="phoneNumber" id="pne"  placeholder="Enter your Phone No" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>"/>
+									</div>
+								</div>
+
+
+								<label for="password" class="cols-sm-2 control-label">Password</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock" ></span></span>
+										<input required type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>"/>
+									</div>
+								</div>
+
+								<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-lock" ></span></span>
+										<input required type="password" class="form-control" name="C_password" id="confirm"  placeholder="Confirm your Password" pattern="[^\/;,*<>=+]*" size="15" maxlength="20" value="<?php if(isset($_POST['C_password'])) echo $_POST['C_password']; ?>"/>
+									</div>
+								</div>
+
+
+							<div style="margin-top:10%">
+								<button type="submit" name="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+							</div>
+
+						</form>
+<?php if(isset($fmsg)) : ?>
+	<div class="alert alert-danger">
+		<?=$fmsg?>
+		<?php unset($fmsg); ?>
+	</div>
+<?php endif; ?>						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+     
+   
+    </div>		
+		
+		
       </div>
     </div>
   </div>
