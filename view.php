@@ -45,14 +45,21 @@
                     <li class="active"><a href="#">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
-                    <li><a href='RegisterAssistant.php'>Register Office Assistant</a></li>
+                    <!-- <li><a href='RegisterAssistant.php'>Register Office Assistant</a></li> -->
                     <?php
                         session_start();
                         require('mysqli_connect.php');
                         $Username2 = $_SESSION['username'];
-                        $query3 = "SELECT `Type` FROM `users` WHERE Email='$Username2'";
-                        $result3 = mysqli_query($dbc,$query3);
-                        if($result3 == "Office Manager"){
+                        if(strpos($_SESSION['assName'], '@') !== false){
+
+                            $result3 = $dbc->query("SELECT `Type` FROM `users` WHERE Email='$Username2'")->fetch_assoc();
+                            $result3 = print_r($result3, true);
+                        }else{
+                            $assisName = $_SESSION['assName'];
+                            $result3 = $dbc->query("SELECT `Type` FROM `users` WHERE Name='$assisName'")->fetch_assoc();
+                            $result3 = print_r($result3, true);
+                        }
+                        if(strpos($result3, 'M') !== false){
                             echo "<li><a href='RegisterAssistant.php'>Register Office Assistant</a></li>";
                         }
 

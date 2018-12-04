@@ -42,7 +42,14 @@ session_start();
 require ('mysqli_connect.php');
 if (isset($_POST['username']) and isset($_POST['password'])){
     $_SESSION['login'] = true;
+    $_SESSION['assName'] = $_POST['username'];
     $username = $_POST['username'];
+  
+    if(strpos($username, '@') !== false){
+      $_SESSION['assName'] = $_POST['username'];
+    }else{
+      $_SESSION['assName'] = $_POST['username'];
+    }
     $password = $_POST['password'];
 
     $query = "SELECT * FROM `users` WHERE Email='$username' or Name='$username' and Password=SHA1('$password')";
@@ -52,10 +59,19 @@ if (isset($_POST['username']) and isset($_POST['password'])){
 
     $count = mysqli_num_rows($result);
     //If the posted values are equal to the database values, then the session will be created for the user.
-    if ($count >= 1){
+
+    if ($count > 0){
+      if(strpos($username, '@') !== false){
         $_SESSION['username'] = $username;
 
         header('Location: view.php');
+      }else{
+        $email = $dbc->query("SELECT `Email` FROM `users` WHERE Name='$username'")->fetch_object()->Email;
+        $email = print_r($email, true);
+        $_SESSION['username'] = $email;
+        header('Location: view.php');
+      }
+
       
         //http://localhost/Parking_Panda/view.html
     }else{
