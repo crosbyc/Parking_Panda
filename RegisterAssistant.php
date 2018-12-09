@@ -113,7 +113,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phon
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-user" ></span></span>
-										<input required type="text" class="form-control" name="username" id="name"  placeholder="Enter your User Name" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"/>
+										<input required type="text" class="form-control" name="username" id="name"  placeholder="Enter your User Name" pattern="[^\/;,*<>=+@]*" size="15" maxlength="30" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>"/>
 									</div>
 								</div>
 
