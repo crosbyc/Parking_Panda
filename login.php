@@ -1,54 +1,17 @@
 <?php
-/*
-if (isset($_POST['username']) and isset($_POST['password'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    function Login(){
-        if (empty($_POST['username'])){
-            $this->HandleError("Username does not exist");
-            return false;
-        }
-
-        if (empty($_POST['password'])){
-            $this->HandleError("Password incorrect");
-            return false;
-        }
-
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-    }
-
-    if ($username == "Test" && $password == "password"){
-        header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/view.html');
-    }else{
-        $fmsg = "Invalid Login Credentials.";
-    }
-}
-*/
-// Initialize the session
-/*
-session_start();
-
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    //where do we want to direct them to after login
-    exit;
-}
-*/
-// Include config file
 session_start();
 require ('mysqli_connect.php');
 if (isset($_POST['username']) and isset($_POST['password'])){
     $_SESSION['login'] = true;
-    $_SESSION['assName'] = $_POST['username'];
+    $_SESSION['assisName'] = $_POST['username'];
+    $_SESSION['isManager'] = false;
     $username = $_POST['username'];
   
     if(strpos($username, '@') !== false){
-      $_SESSION['assName'] = $_POST['username'];
+      $_SESSION['assisName'] = $_POST['username'];
+      $_SESSION['isManager'] = true;
     }else{
-      $_SESSION['assName'] = $_POST['username'];
+      $_SESSION['assisName'] = $_POST['username'];
     }
     $password = $_POST['password'];
 

@@ -49,12 +49,13 @@
                         session_start();
                         require('mysqli_connect.php');
                         $Username2 = $_SESSION['username'];
-                        if(strpos($_SESSION['assName'], '@') !== false){
+                        $result3;
+                        if(strpos($_SESSION['assisName'], '@') !== false){
 
                             $result3 = $dbc->query("SELECT `Type` FROM `users` WHERE Email='$Username2'")->fetch_assoc();
                             $result3 = print_r($result3, true);
                         }else{
-                            $assisName = $_SESSION['assName'];
+                            $assisName = $_SESSION['assisName'];
                             $result3 = $dbc->query("SELECT `Type` FROM `users` WHERE Name='$assisName'")->fetch_assoc();
                             $result3 = print_r($result3, true);
                         }
@@ -113,13 +114,18 @@ if ($result->num_rows > 0) {
 
 
         echo '<tr>
-                  <td scope="row">' . $row["Spot Number"]. '</td>
+                  <td scope="row">' . $row["Spot Number"].'</td>
                   <td>' . $row["Resident Name"] .'</td>
                   <td> '.$row["Location"] .'</td>
                   <td> '.$row["Type"] .'</td>
                   <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>
-		</tr>';
+                  <td> '.$row["comments"] .'</td>';   
+                  if(strpos($result3, 'M') !== false){
+                    echo '<td><a class="btn btn-warning btn-sm" href="updateParkingSpaces.php?id='.$row["Spot Number"].'">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm" href="deleteParkingSpot.php?id='.$row["Spot Number"].'">Delete</a></td>';
+                }             
+
+		echo '</tr>';
     //$query3 = "SELECT `Type` FROM `users` WHERE `username`= '$Username'";
     }
 } else {
@@ -183,16 +189,24 @@ if ($result->num_rows > 0) {
                   <td> '.$row["Email Address"] .'</td>
                   <td> '.$row["Pets"] .'</td>
                   <td> '.$row["comments"] .'</td>';
+                  ;   
+                  if(strpos($result3, 'M') !== false){
+                    echo '<td><a class="btn btn-warning btn-sm" href="updateResidents.php?id='.$row["Appartment Number"].'">Update</a></td>
+                    <td><a class="btn btn-danger btn-sm" href="deleteResident.php?id='.$row["Appartment Number"].'">Delete</a></td>';
+                }             
 
-                  $query3 = "SELECT `type` FROM `users` WHERE `username`= '". $Username2. "'";
+		echo '</tr>';                  
+
+
+    //               $query3 = "SELECT `type` FROM `users` WHERE `username`= '". $Username2. "'";
       
-    if($query3 == "Office Manager"){
-        echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
-        </tr>';
-    }else{
-        echo '</tr>';
-    }
-    }
+    // if($query3 == "Office Manager"){
+    //     echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
+    //     </tr>';
+    // }else{
+    //     echo '</tr>';
+    // }
+     }
 } else {
     echo "0 results";
 } 

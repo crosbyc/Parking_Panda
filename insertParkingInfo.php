@@ -74,7 +74,14 @@
                     <li class="view.php"><a href="view.php">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="active">Add Parking Information</a></li>
-                    <li><a href="RegisterAssistant.php">Register Office Assistant</a></li>
+                    <?php
+                        
+                        
+                        if($_SESSION['isManager'] == true){
+                            echo "<li><a href='RegisterAssistant.php'>Register Office Assistant</a></li>";
+                        }
+
+                    ?>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
