@@ -39,7 +39,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-
+	<link rel='icon' href='img/panda.ico' type='image/x-icon'/ >
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
@@ -146,7 +146,7 @@
 									<textarea rows="3" class="form-control"  name="comments" id="Comments" pattern="[^\/;,*<>=+]*"></textarea><br>
 								</div>
 							</div>                                    
-							<div class="row">
+							<div class="row" >
 								<button  type="submit" class="btn btn-primary btn-lg" name="insert_parking_info">
 									<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Add Parking
 								</button> 
@@ -154,15 +154,43 @@
                                    
                         </form>
 
-						<div class="row" style="margin-top:10px" style="display:inline;">
-							<form	action="uploadParkingTemplate.php" method='post' style="display:inline;">
-								<button style="margin-left:25%"  type="submit"  class="btn btn-default btn-lg" name="upload_" >
-								<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From File</button>
-							</form>								
+						<div class="row " align="center" style="margin-top:10px" style="display:inline;">
+	
+								<button   type="submit"  class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" name="upload_" >
+								<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Upload From A File</button>
+							
 							<form	action="getParkingInfo.php" method='post' style="display:inline;">	
-								<button  style="margin-left:5%"  type="submit" class="btn btn-default btn-lg" name="download_template" >
+								<button    type="submit" class="btn btn-default btn-lg" name="download_template" >
 								<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Download Template</button>
 							</form>
+						</div>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
+						
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header" >
+											<h1 class="page-header text-center">Select File</h1>
+											<form action="uploadParkingTemplate.php" method="post" enctype="multipart/form-data">
+											    
+												<input  class="file btn btn-sm btn-default" type="file" name="fileToUpload" style="display:inline;">  
+												<div class="input-group input-group-sm" style="margin-left:10%">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-upload" ></span></span>
+													<input class="file btn btn-sm btn-info" type="submit" name="submit" value="Upload" />
+												</div>
+											</form>
+									</div>
+									<div class="modal-body">
+										<p>Select a file Containing Resident Parking Information then Click Upload Button.</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+						  
+							</div>
 						</div>
 
                     </div>
