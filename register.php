@@ -134,16 +134,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['C_pa
 										<input required type="tel" class="form-control" name="phoneNumber" id="pne"  placeholder="Enter your Phone No" size="20" pattern="[^\/;,*<>=+]*" maxlength="40" value="<?php if(isset($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>"/>
 									</div>
 								</div>
-
-								<label for="typ" class="cols-sm-2 control-label">Type</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><span class="glyphicon glyphicon-ok" ></span></span>
-										<input required type="text" class="form-control" id="typ" name="Type" pattern="[^\/;,*<>=+]*" size="15" maxlength="30" value="<?php if(isset($_POST['type'])) echo $_POST['type']; ?>"/>
-									</div>
-								</div>
-
-								<label for="password" class="cols-sm-2 control-label">Password</label>
+							<label for="password" class="cols-sm-2 control-label">Password</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-lock" ></span></span>
