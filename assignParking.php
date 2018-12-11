@@ -1,10 +1,7 @@
 <?php
     require('mysqli_connect.php');
     session_start();
-    /*if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}*/
+
     if (isset($_POST['renterName']) && isset($_POST['aptNo']) && isset($_POST['phoneNo']))
 	{
 		

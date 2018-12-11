@@ -6,13 +6,7 @@
    die;
 }
     if (isset($_POST['Residents_Name']) && isset($_POST['Apartment_Number']) && isset($_POST['Leasing_Period']) && isset($_POST['Building']) && isset($_POST['Phone_Number']) && isset($_POST['Email']) && isset($_POST['Pets'])){
-        /*
-         $username = $_SESSION['username'];
-         if($username == ''){
-              mysqli_close($dbc);
-             header('Location: http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php');
-         }
-         */
+
          $Username = $_SESSION['username'];
          $residentName = $_POST['Residents_Name'];
          $apartmentNumber = $_POST['Apartment_Number'];
@@ -25,7 +19,9 @@
 		 $Storage = 9;
          $comments = $_POST['Comments'];
  
-         $query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$Pets."', '".$comments."', '".$Username."')";
+         $query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, 
+		 `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', 
+		 '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$Pets."', '".$comments."', '".$Username."')";
 
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));

@@ -14,16 +14,27 @@ if (isset($_POST['username']) and isset($_POST['password'])){
       $_SESSION['assisName'] = $_POST['username'];
     }
     $password = $_POST['password'];
-
+    //Checking to see if username exists in the database
     $query = "SELECT * FROM `users` WHERE Email='$username' or Name='$username' and Password=SHA1('$password')";
-
-    
     $result = mysqli_query($dbc, $query) or die(mysqli_error($dbc));
-
     $count = mysqli_num_rows($result);
-    //If the posted values are equal to the database values, then the session will be created for the user.
-
-    if ($count > 0){
+    //Checking to see if password for office manager is in the database
+    $query2 = "SELECT * FROM `users` WHERE Email='$username' and Password=SHA1('$password')";
+    $result2 = mysqli_query($dbc, $query2) or die(mysqli_error($dbc));
+    $count2 = mysqli_num_rows($result2);
+    //Checking to see if password for office assistant is in the database
+    $count3 = 0;
+    if(strpos($username, '@') == false){
+      $query3 = "SELECT * FROM `users` WHERE Name='$username' and Password=SHA1('$password')";
+      $result3 = mysqli_query($dbc, $query3) or die(mysqli_error($dbc));
+      $count3 = mysqli_num_rows($result3);
+    }
+    //If a office assistant account is created with the same password the office manager created, ignore the office managers password
+    if($count2 > 1){
+      $count2 = 1;
+    }
+    //If the username and password inputed into the fields exist in the databse, allow the login to be successful
+    if ($count >= 1 && $count2 == 1 || $count3 == 1){
       if(strpos($username, '@') !== false){
         $_SESSION['username'] = $username;
 
@@ -34,21 +45,10 @@ if (isset($_POST['username']) and isset($_POST['password'])){
         $_SESSION['username'] = $email;
         header('Location: view.php');
       }
-
-      
-        //http://localhost/Parking_Panda/view.html
     }else{
       $fmsg = "Login Failed. Invalid Login Credentials.";
     }
 }
-
-
-/*if (isset($_SESSION['username'])){
-    $username = $_SESSION['username'];
-}*/
-
-
-
 ?>
 
 

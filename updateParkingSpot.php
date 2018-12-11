@@ -1,18 +1,9 @@
 <?php
     session_start();
 	require('mysqli_connect.php');
-    if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}
+
     if (isset($_POST['spot_id']) && isset($_POST['renters_name'])){
-        /*
-         $username = $_SESSION['username'];
-         if($username == ''){
-              mysqli_close($dbc);
-             header('Location: http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php');
-         }
-         */
+
          $spotId = $_POST['spot_id'];
          $rentersName = $_POST['renters_name'];
          

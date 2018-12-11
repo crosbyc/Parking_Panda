@@ -1,5 +1,5 @@
 <?php
-// require once like a config file he will create
+
 session_start();
 
 require_once "mysqli_connect.php";
@@ -26,21 +26,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phon
     }
     mysqli_close($dbc);
 }
-
-
-    /*
-    if (isset($_POST['username']) && isset($_POST['password'])){
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        if($username == "Test" && $email == "Test@gmail.com" && $password == "password" && isset($_POST['submit'])){
-            $smsg = "User Created Successfully.";
-             header('Location: http://localhost/ICS499_ParkingManager_Prototype/htdocs/includes/login.php'); 
-             exit;
-        }else{
-            $fmsg ="User Registration Failed";
-        }
-    */
 
 ?>
 

@@ -23,7 +23,7 @@ if (isset($_POST["Apartment_Number"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Add Resident Information</title>
+    <title>Delete Resident Information</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -67,7 +67,7 @@ if (isset($_POST["Apartment_Number"])){
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header text-center">Add Resident Spots</h1>
+                <h1 class="page-header text-center">Delete Resident Spots</h1>
 
                 <div class="container">
                     <div class="row">

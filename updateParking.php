@@ -1,5 +1,4 @@
 <?php
-// Create connection
 session_start();
 ?>
 <!DOCTYPE html>
@@ -63,63 +62,6 @@ session_start();
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header text-center">Update Parking</h1>
-                <!-- <table width=100% cellpadding=0 cellspacing=0>
-                    <div class="row">
-                        <div class="col">
-                            <h3>Parking Spaces</h3>
-                            <table class="table table-striped">
-                                <div class="table responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>Spot Number</th>
-                                            <th>Renter's Name</th>
-                                            <th>Location</th>
-                                            <th>Type</th>
-                                            <th>Building</th>
-                                            <th>Comments</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody> -->
-<?php
-// Create connection
-//session_start();
-//require('mysqli_connect.php');
-/*if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}*/
-//$con=mysqli_connect("mysqli_connect.php");
-// Check connection
-/*if (mysqli_connect_errno())
-{
-echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-//$Username = $_SESSION['username'];
-$query2 = "SELECT * FROM `resident`";
-$result = mysqli_query($dbc,$query2);
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-
-
-        echo '<tr>
-                  <td scope="row">' . $row["Spot Number"]. '</td>
-                  <td>' . $row["Location"] .'</td>
-                  <td> '.$row["Type"] .'</td>
-                  <td> '.$row["Resident Name"] .'</td>
-                  <td> '.$row["Building"] .'</td>
-                  <td> '.$row["comments"] .'</td>
-                </tr>';
-    }
-} else {
-    echo "0 results";
-} 
-*/
-//mysqli_close($dbc);
-?>
-                                    <!-- </tbody>
-                                </div>
-                        </div> -->
                         <table width=100% cellpadding=0 cellspacing=0>
                             <div class="row">
                                 <div class="col">
@@ -141,13 +83,8 @@ if ($result->num_rows > 0) {
                                     </thead>
                                     <tbody>
 <?php
-// Create connection
 
-if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}
-//$con=mysqli_connect("mysqli_connect.php");
+
 // Check connection
 require('mysqli_connect.php');
 if (mysqli_connect_errno())
@@ -178,7 +115,6 @@ if ($result->num_rows > 0) {
     echo "0 results";
 } 
 
-//mysqli_close($dbc);
 ?>
                                             </tbody>
 
@@ -192,7 +128,6 @@ if ($result->num_rows > 0) {
                                                 <input name="submit" type="submit" value="submit" />
                                             </form>
 <?php
-//require('mysqli_connect.php');
 if (isset($_POST['showAvailable'])){
     echo '<h3>Assign A Spot</h3>
     <table class="table table-striped">

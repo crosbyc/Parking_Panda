@@ -45,14 +45,17 @@
                     <li class="active"><a href="#">View Parking Information</a></li>
                     <li><a href="insertResidentInfo.php">Add Resident Informatoin</a></li>
                     <li><a href="insertParkingInfo.php">Add Parking Information</a></li>
-                    <!-- <li><a href='RegisterAssistant.php'>Register Office Assistant</a></li> -->
                     <?php
                         session_start();
                         require('mysqli_connect.php');
                                                 
                         if($_SESSION['isManager'] == true){
                             echo "<li><a href='RegisterAssistant.php'>Register Office Assistant</a></li>";
+                            $test = $_SESSION['test'];
+                            echo "$test";
                         }
+                    
+                        
 
                     ?>
                 </ul>
@@ -77,24 +80,18 @@
                                     </thead>
                                     <tbody>
 <?php
-// Create connection
-//session_start();
-//require('mysqli_connect.php');
-//session_start();
-
-
-
-//echo $Type;
 if(!$_SESSION['login']){
    header("location:login.php");
    die;
 }
-//$con=mysqli_connect("mysqli_connect.php");
+
 // Check connection
 if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+
 $Username2 = $_SESSION['username'];
 $query2 = "SELECT * FROM `parking space` WHERE `userName` ='". $Username2. "'";
 $result = mysqli_query($dbc,$query2);
@@ -116,13 +113,10 @@ if ($result->num_rows > 0) {
                 }             
 
 		echo '</tr>';
-    //$query3 = "SELECT `Type` FROM `users` WHERE `username`= '$Username'";
     }
 } else {
     echo "0 results";
 } 
-
-//mysqli_close($dbc);
 ?>
                                     </tbody>
                                 </div>
@@ -148,15 +142,6 @@ if ($result->num_rows > 0) {
                                     </thead>
                                     <tbody>
 <?php
-// Create connection
-//session_start();
-//require('mysqli_connect.php');
-/*if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}*/
-//$con=mysqli_connect("mysqli_connect.php");
-// Check connection
 if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -186,22 +171,11 @@ if ($result->num_rows > 0) {
                 }             
 
 		echo '</tr>';                  
-
-
-    //               $query3 = "SELECT `type` FROM `users` WHERE `username`= '". $Username2. "'";
-      
-    // if($query3 == "Office Manager"){
-    //     echo '<td><a class="btn btn-warning btn-sm">Update</a></td>
-    //     </tr>';
-    // }else{
-    //     echo '</tr>';
-    // }
      }
 } else {
     echo "0 results";
 } 
 
-//mysqli_close($dbc);
 ?>
                                             </tbody>
 

@@ -12,7 +12,6 @@ session_start();
 
 $sql = "UPDATE `parking space`
         SET `Spot Number` = '".$spotNumber."',
-        
             Location = '".$location."',
             Type = '".$type."',
             Building = '".$building."',

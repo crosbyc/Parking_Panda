@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="icon" href="../../favicon.ico">-->
 
     <title>Update Parking</title>
 
@@ -63,9 +62,6 @@
 <?php
 require('mysqli_connect.php');
 
- // if (isset($_POST['category'])){
-
-  //  $name = "Planning";
   $Username2 = $_SESSION['username'];
     $sql = "SELECT * FROM `parking space`
             WHERE `userName` ='". $Username2. "'";
@@ -96,15 +92,6 @@ require('mysqli_connect.php');
       echo "0 results";
   }//end else
 
-?>
-                                   
-<?php
-// Create connection
-
-if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}
 ?>
                                         </div>
                                     </div>
