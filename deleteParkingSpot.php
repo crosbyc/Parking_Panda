@@ -24,7 +24,7 @@ if (isset($_POST["spot_id"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Add Parking Information</title>
+    <title>Delete Parking Information</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -68,7 +68,7 @@ if (isset($_POST["spot_id"])){
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header text-center">Add Parking Spots</h1>
+                <h1 class="page-header text-center">Delete Parking Spots</h1>
 
                 <div class="container">
                     <div class="row">
@@ -90,7 +90,7 @@ if (isset($_POST["spot_id"])){
 						</div>
                         <div class="row">
 								<button  type="submit" class="btn btn-primary btn-lg" name="delete_resident_info">
-									<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Delete Resident
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span> Delete Parking Spot
 								</button> 
 							</form>
 

@@ -86,7 +86,7 @@ require('mysqli_connect.php');
               Email Address: <br> <input type="text" name="Email_Address" value="'.$row["Email Address"].'"  maxlength="255"> <br>
               Pets: <br> <input type="text" name="Pets" value="'.$row["Pets"].'"  maxlength="255"> <br>
               Comments: <br> <input type="text" name="comments" value="'.$row["comments"].'" maxlength="75"> <br> 
-              <button type="submit" name="submit" class="btn btn-success btn-sm">Update Parking Space</button>
+              <button type="submit" name="submit" class="btn btn-success btn-sm">Update Resident</button>
             </form>';
 
       }//end while
@@ -99,14 +99,7 @@ require('mysqli_connect.php');
   }//end else
 
 ?>
-<?php
-// Create connection
 
-if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}
-?>
                                         </div>
                                     </div>
                             </div>

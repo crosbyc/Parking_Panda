@@ -44,7 +44,7 @@
   
 				$query = "INSERT INTO `resident` (`Appartment Number`, `Name`, `Building`, `Parking Spot`, `Leasing Period`, `Phone Number`, `Email Address`, `Pets`, `comments`, `userName`) VALUES ('".$apartmentNumber."', '".$residentName."', '".$building."', '".$parkingSpot."', '".$leasingPeriod."', '".$phoneNumber."', '".$email."', '".$pets."', '".$comments."', '".$Username."')";
 
-				@mysqli_query($dbc, $query);  //or die(mysqli_error($dbc));  
+				@mysqli_query($dbc, $query);    
 			
 			}
 			$uploadMsg = $uploadMsg + "\n File loaded to database";

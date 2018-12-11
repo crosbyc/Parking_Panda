@@ -1,10 +1,7 @@
 <?php
     session_start();
 	require('mysqli_connect.php');
-    if(!$_SESSION['login']){
-   header("location:http://sp-cfsics.metrostate.edu/~ics311sp170206/login.php");
-   die;
-}
+
     if (isset($_POST['spot_id']) && isset($_POST['Location']) && isset($_POST['Type']) && isset($_POST['Building']) && isset($_POST['comments'])){
         
          $username = $_SESSION['username'];
@@ -16,13 +13,11 @@
          $Building = $_POST['Building'];
          $comments = $_POST['comments'];
  
-         $query = "INSERT INTO `parking space` (`Spot Number`, `Location`, `Type`, `Resident Name`, `Building`, `comments`, `userName`) VALUES ('".$spotId."', '".$Location."', '".$Type."', '".$rentersName."', '".$Building."', '".$comments."', '".$username."')";
+         $query = "INSERT INTO `parking space` (`Spot Number`, `Location`, `Type`, `Resident Name`, `Building`, `comments`, `userName`) VALUES 
+		 ('".$spotId."', '".$Location."', '".$Type."', '".$rentersName."', '".$Building."', '".$comments."', '".$username."')";
          
          mysqli_query($dbc, $query)or die(mysqli_error($dbc));
-     }
-	 
-
-	 
+     }	 
      mysqli_close($dbc);
 
 ?>

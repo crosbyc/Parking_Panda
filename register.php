@@ -1,5 +1,4 @@
 <?php
-// require once like a config file he will create
 require_once "mysqli_connect.php";
 // If the values are posted, insert them into the database.
 
@@ -68,10 +67,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['C_pa
 </head>
 
 <body>
-  <!--Maybe helpful docs? 
-      https://www.w3schools.com/PHP/php_mysql_intro.asp
-      http://stackoverflow.com/questions/15090785/redirecting-to-a-new-page-after-successful-login 
-   -->
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -90,7 +85,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['C_pa
       </div>
     </div>
   </nav>
-  <!-- make this a general home page, add left nav for log in page -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">

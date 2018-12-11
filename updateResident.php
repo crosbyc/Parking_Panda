@@ -18,7 +18,6 @@ $sql = "UPDATE `resident`
         SET `Appartment Number` = '".$apartmentNumber."',
             Name = '".$name."',
             Building = '".$Building."',
-
             `Leasing Period` = '".$leasingPeriod."',
             `Phone Number` = '".$phoneNumber."',
             `Email Address` = '".$emailAddress."',

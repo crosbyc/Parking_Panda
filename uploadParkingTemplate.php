@@ -37,7 +37,7 @@
 				$comments = $filesop[5];
 				
 				$query = "INSERT INTO `parking space` (`Spot Number`, `Location`, `Type`, `Resident Name`, `Building`, `comments`, `userName`) VALUES ('".$spotId."', '".$Location."', '".$Type."', '".$rentersName."', '".$Building."', '".$comments."', '".$username."')";
-				@mysqli_query($dbc, $query);  //or die(mysqli_error($dbc));  
+				@mysqli_query($dbc, $query);  
 			
 			}
 			$uploadMsg = $uploadMsg + "\n File loaded to database";
